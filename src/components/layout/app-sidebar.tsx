@@ -52,22 +52,26 @@ const data = {
   ],
   navMain: [
     {
-      title: "Playground",
-      url: "#",
+      title: "Plugin",
+      url: "/available-license",
       icon: SquareTerminal,
       isActive: true,
       items: [
         {
-          title: "History",
-          url: "#",
+          title: "Available License",
+          url: "/plugin/available-license",
         },
         {
-          title: "Starred",
-          url: "#",
+          title: "Agent Installed",
+          url: "/plugin/agent-installed",
         },
         {
-          title: "Settings",
-          url: "#",
+          title: "Allocated License",
+          url: "/plugin/allocated-license",
+        },
+        {
+          title: "All License Reports",
+          url: "/plugin/all-license-report",
         },
       ],
     },

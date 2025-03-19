@@ -17,6 +17,7 @@ import {
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
 import { useBreadcrumbs } from "@/helpers/breadcrumb.helper";
+import Link from "next/link";
 
 export default function DashboardLayout({
   children,
@@ -40,8 +41,8 @@ export default function DashboardLayout({
                       {item.isCurrentPage ? (
                         <BreadcrumbPage>{item.label}</BreadcrumbPage>
                       ) : (
-                        <BreadcrumbLink href={item.href}>
-                          {item.label}
+                        <BreadcrumbLink asChild>
+                          <Link href={item.href}>{item.label}</Link>
                         </BreadcrumbLink>
                       )}
                     </BreadcrumbItem>
