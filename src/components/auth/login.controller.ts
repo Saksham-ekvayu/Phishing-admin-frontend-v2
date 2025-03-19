@@ -164,13 +164,11 @@ export const logInController = (): IAuthControllerResponse => {
    * @return {boolean}
    */
   const isValidSubmittion = useCallback((): boolean => {
-    const emailError = emailRef.current?.validateValue();
-    const passwordError = passwordRef.current?.validateValue();
+    const emailValid = emailRef.current?.validateValue();
+    const passwordValid = passwordRef.current?.validateValue();
 
-    if (!(emailError && passwordError)) {
-      return true;
-    }
-    return false;
+    // Return true if validation fails (has errors)
+    return !(emailValid && passwordValid);
   }, []);
 
   /**
@@ -178,12 +176,10 @@ export const logInController = (): IAuthControllerResponse => {
    * @return {boolean}
    */
   const isValidOtp = useCallback((): boolean => {
-    const otpError = otpRef.current?.validateValue();
+    const otpValid = otpRef.current?.validateValue();
 
-    if (!otpError) {
-      return true;
-    }
-    return false;
+    // Return true if validation fails (has errors)
+    return !otpValid;
   }, []);
 
   /**
@@ -191,18 +187,21 @@ export const logInController = (): IAuthControllerResponse => {
    * @return {boolean}
    */
   const isValidResetPassword = useCallback((): boolean => {
-    const newPasswordError = newPasswordRef.current?.validateValue();
-    const confirmPasswordError = confirmPasswordRef.current?.validateValue();
+    const newPasswordValid = newPasswordRef.current?.validateValue();
+    const confirmPasswordValid = confirmPasswordRef.current?.validateValue();
 
-    if (!(newPasswordError && confirmPasswordError)) {
+    // Check if validation fails
+    if (!(newPasswordValid && confirmPasswordValid)) {
       return true;
     }
 
+    // Check if passwords match
     if (newPassword !== confirmPassword) {
       enqueueSnackbar("Passwords do not match", SnackbarTypeEnum.ERROR);
       return true;
     }
 
+    // Return false if all validations pass (no errors)
     return false;
   }, [confirmPassword, enqueueSnackbar, newPassword]);
 
@@ -225,10 +224,13 @@ export const logInController = (): IAuthControllerResponse => {
       };
 
       try {
+        // Uncomment this in production
         // const response = await dispatch(
         //   AuthenticationThunk.adminSignIn(payload) as any
         // ).unwrap();
         // enqueueSnackbar(SIGNIN_SUCCESSFUL, SnackbarTypeEnum.SUCCESS);
+        
+        // For demo purposes
         setFormState("otp");
       } catch (error) {
         enqueueSnackbar(SOMETHING_WENT_WRONG, SnackbarTypeEnum.ERROR);
@@ -273,8 +275,6 @@ export const logInController = (): IAuthControllerResponse => {
 
     try {
       // In a real implementation, you would dispatch an action to resend OTP
-      // For now, we'll just simulate a successful resend
-
       // Different payload based on which form state we're in
       if (formState === "otp") {
         // For login OTP resend
@@ -287,7 +287,6 @@ export const logInController = (): IAuthControllerResponse => {
         // await dispatch(AuthenticationThunk.resendOtp(payload) as any);
       } else if (formState === "forgotPasswordOtp") {
         // For forgot password OTP resend
-        // Here you would dispatch the forgot password resend OTP action
         // await dispatch(AuthenticationThunk.resendForgotPasswordOtp({ email: email.trim() }) as any);
       }
 
@@ -300,7 +299,7 @@ export const logInController = (): IAuthControllerResponse => {
     }
 
     setIsProcessing(false);
-  }, [dispatch, email, password, formState, enqueueSnackbar]);
+  }, [email, password, formState, enqueueSnackbar]);
 
   /**
    * @function {handleForgotPassword} - To handle forgot password request
@@ -309,9 +308,9 @@ export const logInController = (): IAuthControllerResponse => {
   const handleForgotPassword = useCallback(
     async (event: FormEvent<HTMLFormElement>): Promise<void> => {
       event.preventDefault();
-      const emailError = emailRef.current?.validateValue();
+      const emailValid = emailRef.current?.validateValue();
 
-      if (!emailError) {
+      if (!emailValid) {
         return;
       }
 
@@ -319,6 +318,8 @@ export const logInController = (): IAuthControllerResponse => {
 
       try {
         // In a real implementation, you would dispatch an action to send a reset password email
+        // await dispatch(AuthenticationThunk.forgotPassword({ email: email.trim() }) as any);
+        
         enqueueSnackbar(
           "Verification code sent to your email",
           SnackbarTypeEnum.SUCCESS
@@ -329,7 +330,7 @@ export const logInController = (): IAuthControllerResponse => {
       }
       setIsProcessing(false);
     },
-    [enqueueSnackbar]
+    [enqueueSnackbar, email]
   );
 
   /**
@@ -347,6 +348,11 @@ export const logInController = (): IAuthControllerResponse => {
 
       try {
         // In a real implementation, you would verify the OTP
+        // await dispatch(AuthenticationThunk.verifyForgotPasswordOtp({ 
+        //   email: email.trim(),
+        //   otp: otp.trim() 
+        // }) as any);
+        
         enqueueSnackbar("Verification successful", SnackbarTypeEnum.SUCCESS);
         setFormState("resetPassword");
       } catch (error) {
@@ -354,7 +360,7 @@ export const logInController = (): IAuthControllerResponse => {
       }
       setIsProcessing(false);
     },
-    [enqueueSnackbar, isValidOtp]
+    [enqueueSnackbar, isValidOtp, email, otp]
   );
 
   /**
@@ -372,16 +378,23 @@ export const logInController = (): IAuthControllerResponse => {
 
       try {
         // In a real implementation, you would dispatch an action to reset the password
+        // await dispatch(AuthenticationThunk.resetPassword({
+        //   email: email.trim(),
+        //   otp: otp.trim(),
+        //   newPassword: newPassword.trim()
+        // }) as any);
+        
         enqueueSnackbar("Password reset successful", SnackbarTypeEnum.SUCCESS);
         setFormState("login");
         setNewPassword("");
         setConfirmPassword("");
+        setOtp("");
       } catch (error) {
         enqueueSnackbar(SOMETHING_WENT_WRONG, SnackbarTypeEnum.ERROR);
       }
       setIsProcessing(false);
     },
-    [enqueueSnackbar, isValidResetPassword]
+    [enqueueSnackbar, isValidResetPassword, email, otp, newPassword]
   );
 
   return {
