@@ -14,9 +14,7 @@ import { useDispatch } from "react-redux";
 import { AuthenticationThunk } from "@/redux/actions/auth/auth.action";
 import { ValidationHelper } from "@/helpers/validation.helper";
 import { useRouter } from "next/navigation";
-import { EMAIL_ADDRESS } from "@/constants";
 import { InputAdornment } from "@mui/material";
-import { TextInputField } from "../inputs-field";
 import { Icon } from "../icon";
 import {
   faEnvelope,
@@ -201,7 +199,7 @@ function LoginForm() {
           <form onSubmit={handleLogin}>
             <div className="grid gap-4">
               <div className="grid gap-2">
-                <TextInputField
+                {/* <TextInputField
                   id="email"
                   type="email"
                   placeholder={EMAIL_ADDRESS}
@@ -222,10 +220,10 @@ function LoginForm() {
                       </InputAdornment>
                     ),
                   }}
-                />
+                /> */}
               </div>
               <div className="grid gap-2">
-                <TextInputField
+                {/* <TextInputField
                   id="password"
                   type={showPassword ? "text" : "password"}
                   placeholder="Enter your password"
@@ -260,7 +258,7 @@ function LoginForm() {
                       </InputAdornment>
                     ),
                   }}
-                />
+                /> */}
               </div>
               <Button
                 type="submit"
@@ -291,7 +289,7 @@ function LoginForm() {
                 <p className="font-medium">{email}</p>
               </div>
               <div className="grid gap-2">
-                <TextInputField
+                {/* <TextInputField
                   id="otp"
                   type="text"
                   placeholder="Enter verification code"
@@ -312,7 +310,7 @@ function LoginForm() {
                       </InputAdornment>
                     ),
                   }}
-                />
+                /> */}
               </div>
               <Button type="submit" disabled={isLoading}>
                 {isLoading ? "Verifying..." : "Verify"}
@@ -338,7 +336,7 @@ function LoginForm() {
                 <p>Enter your email to receive a verification code</p>
               </div>
               <div className="grid gap-2">
-                <TextInputField
+                {/* <TextInputField
                   id="email"
                   type="email"
                   placeholder={EMAIL_ADDRESS}
@@ -359,7 +357,7 @@ function LoginForm() {
                       </InputAdornment>
                     ),
                   }}
-                />
+                /> */}
               </div>
               <Button type="submit" disabled={isLoading}>
                 {isLoading ? "Sending..." : "Send Verification Code"}
@@ -386,7 +384,7 @@ function LoginForm() {
                 <p className="font-medium">{email}</p>
               </div>
               <div className="grid gap-2">
-                <TextInputField
+                {/* <TextInputField
                   id="otp"
                   type="text"
                   placeholder="Enter verification code"
@@ -407,7 +405,7 @@ function LoginForm() {
                       </InputAdornment>
                     ),
                   }}
-                />
+                /> */}
               </div>
               <Button type="submit" disabled={isLoading}>
                 {isLoading ? "Verifying..." : "Verify"}
@@ -433,7 +431,7 @@ function LoginForm() {
                 <p>Create a new password</p>
               </div>
               <div className="grid gap-2">
-                <TextInputField
+                {/* <TextInputField
                   id="newPassword"
                   type={showPassword ? "text" : "password"}
                   placeholder="Enter your new password"
@@ -468,10 +466,10 @@ function LoginForm() {
                       </InputAdornment>
                     ),
                   }}
-                />
+                /> */}
               </div>
               <div className="grid gap-2">
-                <TextInputField
+                {/* <TextInputField
                   id="confirmPassword"
                   type={showPassword ? "text" : "password"}
                   placeholder="Enter your confirm password"
@@ -506,7 +504,7 @@ function LoginForm() {
                       </InputAdornment>
                     ),
                   }}
-                />
+                /> */}
               </div>
               <Button type="submit" disabled={isLoading}>
                 {isLoading ? "Resetting..." : "Reset Password"}

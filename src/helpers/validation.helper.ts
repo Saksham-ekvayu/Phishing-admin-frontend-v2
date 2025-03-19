@@ -1,12 +1,11 @@
-import { IValidationResponse } from "@/src/component";
-
-import { RegexLibrary } from "@/src/library";
+import { RegexLibrary } from "@/library";
 import {
   THIS_FILED_IS_REQUIRED,
   PLEASE_ENTER_VALID_URL,
   PLEASE_ENTER_VALID_PHONENUMBER,
   MUST_BE_IN_VALID_FORMAT,
-} from "@/src/constants";
+} from "@/constants";
+import { IValidationResponse } from "@/components/textInputField";
 
 /**
  * This class holds all the validations Validation Helper

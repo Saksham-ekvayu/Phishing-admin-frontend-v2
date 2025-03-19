@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import _ from 'lodash';
 
-import RegexLibrary from '@/src/library/regex.lib';
+import RegexLibrary from '@/library/regex.lib';
 
 /**
  * This class holds `string` Helper
