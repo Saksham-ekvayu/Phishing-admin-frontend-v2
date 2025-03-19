@@ -1,19 +1,9 @@
 "use client";
 
-import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import Image from "next/image";
 import loginPageBackground from "@/assets/login_page_background.png";
-import { useDispatch } from "react-redux";
-import { AuthenticationThunk } from "@/redux/actions/auth/auth.action";
-import { ValidationHelper } from "@/helpers/validation.helper";
-import { useRouter } from "next/navigation";
 import { InputAdornment } from "@mui/material";
 import { Icon } from "../icon";
 import {
@@ -23,190 +13,57 @@ import {
   faEyeSlash,
   faKey,
 } from "@fortawesome/free-solid-svg-icons";
-
-type FormState =
-  | "login"
-  | "otp"
-  | "forgotPassword"
-  | "forgotPasswordOtp"
-  | "resetPassword";
+import TextInputField from "../textInputField";
+import { EMAIL_ADDRESS, PASSWORD, VERIFICATION_CODE } from "@/constants";
+import { logInController } from "./login.controller";
+import { ValidationHelper } from "@/helpers";
 
 function LoginForm() {
-  const dispatch = useDispatch();
-  const router = useRouter();
+  const { getters, handlers, ref } = logInController();
+  const {
+    email,
+    password,
+    showPassword,
+    isProcessing,
+    formState,
+    otp,
+    newPassword,
+    confirmPassword,
+  } = getters;
 
-  const [formState, setFormState] = useState<FormState>("login");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [otp, setOtp] = useState("");
-  const [newPassword, setNewPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
-  const [emailError, setEmailError] = useState("");
-  const [passwordError, setPasswordError] = useState("");
-  const [otpError, setOtpError] = useState("");
-  const [newPasswordError, setNewPasswordError] = useState("");
-  const [confirmPasswordError, setConfirmPasswordError] = useState("");
-  const [isLoading, setIsLoading] = useState(false);
-  const [showPassword, setShowPassword] = useState(false);
+  const {
+    onEmailChange,
+    onPasswordChange,
+    handleShowPassword,
+    handleSubmit,
+    onOtpChange,
+    onNewPasswordChange,
+    onConfirmPasswordChange,
+    handleOtpVerification,
+    handleForgotPassword,
+    handleForgotPasswordOtp,
+    handleResetPassword,
+    setFormState,
+  } = handlers;
 
-  const validateEmail = () => {
-    const validation = ValidationHelper.emailValidator(email);
-    setEmailError(validation.message);
-    return validation.isValid;
-  };
-
-  const validatePassword = () => {
-    const validation = ValidationHelper.validateNotEmpty(password);
-    setPasswordError(validation.message);
-    return validation.isValid;
-  };
-
-  const validateOtp = () => {
-    const validation = ValidationHelper.validateNotEmpty(otp);
-    setOtpError(validation.message);
-    return validation.isValid;
-  };
-
-  const validateNewPassword = () => {
-    const validation = ValidationHelper.validateNotEmpty(newPassword);
-    setNewPasswordError(validation.message);
-    return validation.isValid;
-  };
-
-  const validateConfirmPassword = () => {
-    if (newPassword !== confirmPassword) {
-      setConfirmPasswordError("Passwords do not match");
-      return false;
-    }
-    setConfirmPasswordError("");
-    return true;
-  };
-
-  const handleShowPassword = () => {
-    setShowPassword(!showPassword);
-  };
-
-  const handleLogin = async (e: React.FormEvent) => {
-    e.preventDefault();
-
-    if (!validateEmail() || !validatePassword()) {
-      return;
-    }
-
-    setIsLoading(true);
-    try {
-      // In a real implementation, you would dispatch the login action
-      // and handle the response to move to OTP verification
-      // const response = await dispatch(AuthenticationThunk.adminSignIn({ email, password }));
-
-      // For now, we'll just simulate moving to OTP verification
-      setFormState("otp");
-    } catch (error) {
-      console.error("Login error:", error);
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
-  const handleOtpVerification = async (e: React.FormEvent) => {
-    e.preventDefault();
-
-    if (!validateOtp()) {
-      return;
-    }
-
-    setIsLoading(true);
-    try {
-      // In a real implementation, you would verify the OTP
-      // and redirect to the dashboard on success
-
-      // For now, we'll just simulate a successful login
-      router.push("/");
-    } catch (error) {
-      console.error("OTP verification error:", error);
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
-  const handleForgotPassword = async (e: React.FormEvent) => {
-    e.preventDefault();
-
-    if (!validateEmail()) {
-      return;
-    }
-
-    setIsLoading(true);
-    try {
-      // In a real implementation, you would dispatch an action to send a reset password email
-
-      // For now, we'll just simulate moving to OTP verification for password reset
-      setFormState("forgotPasswordOtp");
-    } catch (error) {
-      console.error("Forgot password error:", error);
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
-  const handleForgotPasswordOtp = async (e: React.FormEvent) => {
-    e.preventDefault();
-
-    if (!validateOtp()) {
-      return;
-    }
-
-    setIsLoading(true);
-    try {
-      // In a real implementation, you would verify the OTP
-
-      // For now, we'll just simulate moving to reset password form
-      setFormState("resetPassword");
-    } catch (error) {
-      console.error("OTP verification error:", error);
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
-  const handleResetPassword = async (e: React.FormEvent) => {
-    e.preventDefault();
-
-    if (!validateNewPassword() || !validateConfirmPassword()) {
-      return;
-    }
-
-    setIsLoading(true);
-    try {
-      // In a real implementation, you would dispatch an action to reset the password
-
-      // For now, we'll just simulate going back to login
-      setFormState("login");
-      setPassword("");
-      setNewPassword("");
-      setConfirmPassword("");
-    } catch (error) {
-      console.error("Reset password error:", error);
-    } finally {
-      setIsLoading(false);
-    }
-  };
+  const { emailRef, passwordRef, otpRef, newPasswordRef, confirmPasswordRef } =
+    ref;
 
   const renderForm = () => {
     switch (formState) {
       case "login":
         return (
-          <form onSubmit={handleLogin}>
+          <form onSubmit={handleSubmit}>
             <div className="grid gap-4">
               <div className="grid gap-2">
-                {/* <TextInputField
-                  id="email"
+                <TextInputField
                   type="email"
                   placeholder={EMAIL_ADDRESS}
-                  onChange={(e) => setEmail(e.target.value)}
+                  label={EMAIL_ADDRESS}
+                  onChange={onEmailChange}
                   value={email}
+                  ref={emailRef}
                   validation={ValidationHelper.emailValidator}
-                  label="Email"
                   InputProps={{
                     startAdornment: (
                       <InputAdornment position="start">
@@ -220,18 +77,29 @@ function LoginForm() {
                       </InputAdornment>
                     ),
                   }}
-                /> */}
+                />
               </div>
               <div className="grid gap-2">
-                {/* <TextInputField
-                  id="password"
+                <TextInputField
                   type={showPassword ? "text" : "password"}
-                  placeholder="Enter your password"
-                  onChange={(e) => setPassword(e.target.value)}
+                  placeholder={PASSWORD}
+                  label={PASSWORD}
+                  onChange={onPasswordChange}
+                  ref={passwordRef}
                   value={password}
                   validation={ValidationHelper.validateNotEmpty}
-                  label="Password"
                   InputProps={{
+                    endAdornment: (
+                      <InputAdornment sx={{ ml: 0.5 }} position="end">
+                        <Icon
+                          icon={showPassword ? faEyeSlash : faEye}
+                          // title={showPassword ? "hide" : "show"}
+                          onClick={handleShowPassword}
+                          color="inherit"
+                          size="small"
+                        />
+                      </InputAdornment>
+                    ),
                     startAdornment: (
                       <InputAdornment position="start">
                         <Icon
@@ -243,29 +111,15 @@ function LoginForm() {
                         />
                       </InputAdornment>
                     ),
-                    endAdornment: (
-                      <InputAdornment position="end">
-                        <Icon
-                          icon={showPassword ? faEyeSlash : faEye}
-                          title={
-                            showPassword ? "Hide password" : "Show password"
-                          }
-                          onClick={handleShowPassword}
-                          color="inherit"
-                          size="small"
-                          onlyIcon
-                        />
-                      </InputAdornment>
-                    ),
                   }}
-                /> */}
+                />
               </div>
               <Button
                 type="submit"
-                disabled={isLoading}
-                className="shadow-red-500 shadow-inner"
+                disabled={isProcessing}
+                className="border bg-primary"
               >
-                {isLoading ? "Signing in..." : "Sign In"}
+                {isProcessing ? "Signing in..." : "Sign In"}
               </Button>
               <div className="text-center">
                 <Button
@@ -289,20 +143,19 @@ function LoginForm() {
                 <p className="font-medium">{email}</p>
               </div>
               <div className="grid gap-2">
-                {/* <TextInputField
-                  id="otp"
+                <TextInputField
                   type="text"
-                  placeholder="Enter verification code"
-                  onChange={(e) => setOtp(e.target.value)}
+                  placeholder={VERIFICATION_CODE}
+                  onChange={onOtpChange}
                   value={otp}
+                  ref={otpRef}
                   validation={ValidationHelper.validateNotEmpty}
-                  label="Verification Code"
                   InputProps={{
                     startAdornment: (
                       <InputAdornment position="start">
                         <Icon
                           icon={faKey}
-                          title="OTP"
+                          title="Verification Code"
                           color="inherit"
                           size="small"
                           onlyIcon
@@ -310,10 +163,10 @@ function LoginForm() {
                       </InputAdornment>
                     ),
                   }}
-                /> */}
+                />
               </div>
-              <Button type="submit" disabled={isLoading}>
-                {isLoading ? "Verifying..." : "Verify"}
+              <Button type="submit" disabled={isProcessing}>
+                {isProcessing ? "Verifying..." : "Verify"}
               </Button>
               <div className="text-center">
                 <Button
@@ -336,14 +189,13 @@ function LoginForm() {
                 <p>Enter your email to receive a verification code</p>
               </div>
               <div className="grid gap-2">
-                {/* <TextInputField
-                  id="email"
+                <TextInputField
                   type="email"
                   placeholder={EMAIL_ADDRESS}
-                  onChange={(e) => setEmail(e.target.value)}
+                  onChange={onEmailChange}
                   value={email}
+                  ref={emailRef}
                   validation={ValidationHelper.emailValidator}
-                  label="Email"
                   InputProps={{
                     startAdornment: (
                       <InputAdornment position="start">
@@ -357,10 +209,10 @@ function LoginForm() {
                       </InputAdornment>
                     ),
                   }}
-                /> */}
+                />
               </div>
-              <Button type="submit" disabled={isLoading}>
-                {isLoading ? "Sending..." : "Send Verification Code"}
+              <Button type="submit" disabled={isProcessing}>
+                {isProcessing ? "Sending..." : "Send Verification Code"}
               </Button>
               <div className="text-center">
                 <Button
@@ -384,20 +236,19 @@ function LoginForm() {
                 <p className="font-medium">{email}</p>
               </div>
               <div className="grid gap-2">
-                {/* <TextInputField
-                  id="otp"
+                <TextInputField
                   type="text"
-                  placeholder="Enter verification code"
-                  onChange={(e) => setOtp(e.target.value)}
+                  placeholder={VERIFICATION_CODE}
+                  onChange={onOtpChange}
                   value={otp}
+                  ref={otpRef}
                   validation={ValidationHelper.validateNotEmpty}
-                  label="Verification Code"
                   InputProps={{
                     startAdornment: (
                       <InputAdornment position="start">
                         <Icon
                           icon={faKey}
-                          title="OTP"
+                          title="Verification Code"
                           color="inherit"
                           size="small"
                           onlyIcon
@@ -405,10 +256,10 @@ function LoginForm() {
                       </InputAdornment>
                     ),
                   }}
-                /> */}
+                />
               </div>
-              <Button type="submit" disabled={isLoading}>
-                {isLoading ? "Verifying..." : "Verify"}
+              <Button type="submit" disabled={isProcessing}>
+                {isProcessing ? "Verifying..." : "Verify"}
               </Button>
               <div className="text-center">
                 <Button
@@ -431,14 +282,13 @@ function LoginForm() {
                 <p>Create a new password</p>
               </div>
               <div className="grid gap-2">
-                {/* <TextInputField
-                  id="newPassword"
+                <TextInputField
                   type={showPassword ? "text" : "password"}
-                  placeholder="Enter your new password"
-                  onChange={(e) => setNewPassword(e.target.value)}
+                  placeholder="New Password"
+                  onChange={onNewPasswordChange}
                   value={newPassword}
+                  ref={newPasswordRef}
                   validation={ValidationHelper.validateNotEmpty}
-                  label="New Password"
                   InputProps={{
                     startAdornment: (
                       <InputAdornment position="start">
@@ -466,17 +316,16 @@ function LoginForm() {
                       </InputAdornment>
                     ),
                   }}
-                /> */}
+                />
               </div>
               <div className="grid gap-2">
-                {/* <TextInputField
-                  id="confirmPassword"
+                <TextInputField
                   type={showPassword ? "text" : "password"}
-                  placeholder="Enter your confirm password"
-                  onChange={(e) => setConfirmPassword(e.target.value)}
+                  placeholder="Confirm Password"
+                  onChange={onConfirmPasswordChange}
                   value={confirmPassword}
+                  ref={confirmPasswordRef}
                   validation={ValidationHelper.validateNotEmpty}
-                  label="Confirm Password"
                   InputProps={{
                     startAdornment: (
                       <InputAdornment position="start">
@@ -504,10 +353,10 @@ function LoginForm() {
                       </InputAdornment>
                     ),
                   }}
-                /> */}
+                />
               </div>
-              <Button type="submit" disabled={isLoading}>
-                {isLoading ? "Resetting..." : "Reset Password"}
+              <Button type="submit" disabled={isProcessing}>
+                {isProcessing ? "Resetting..." : "Reset Password"}
               </Button>
               <div className="text-center">
                 <Button
