@@ -146,6 +146,7 @@ function LoginForm() {
                 <TextInputField
                   type="text"
                   placeholder={VERIFICATION_CODE}
+                  label={VERIFICATION_CODE}
                   onChange={onOtpChange}
                   value={otp}
                   ref={otpRef}
