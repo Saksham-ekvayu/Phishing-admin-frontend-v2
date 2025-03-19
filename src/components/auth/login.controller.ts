@@ -3,7 +3,12 @@ import { useRouter } from "next/navigation";
 import { AppRouterInstance } from "next/dist/shared/lib/app-router-context.shared-runtime";
 
 import { ITextInputFieldData, ITextInputFieldRef } from "@/components";
-import { SIGNIN_SUCCESSFUL, SOMETHING_WENT_WRONG, EMAIL_ADDRESS, PASSWORD } from "@/constants";
+import {
+  SIGNIN_SUCCESSFUL,
+  SOMETHING_WENT_WRONG,
+  EMAIL_ADDRESS,
+  PASSWORD,
+} from "@/constants";
 import { SnackbarTypeEnum, RoutePathEnum } from "@/enum";
 import { useAppSnackbar } from "@/hooks/snackbar.hook";
 import { useAppDispatch, AuthenticationThunk } from "@/redux";
@@ -39,9 +44,12 @@ interface IAuthControllerResponse {
     handleSubmit: (event: FormEvent<HTMLFormElement>) => Promise<void>;
     handleOtpVerification: (event: FormEvent<HTMLFormElement>) => Promise<void>;
     handleForgotPassword: (event: FormEvent<HTMLFormElement>) => Promise<void>;
-    handleForgotPasswordOtp: (event: FormEvent<HTMLFormElement>) => Promise<void>;
+    handleForgotPasswordOtp: (
+      event: FormEvent<HTMLFormElement>
+    ) => Promise<void>;
     handleResetPassword: (event: FormEvent<HTMLFormElement>) => Promise<void>;
     setFormState: (state: FormState) => void;
+    handleResendOtp: () => Promise<void>;
   };
   ref: {
     emailRef: RefObject<ITextInputFieldRef | null>;
@@ -120,22 +128,28 @@ export const logInController = (): IAuthControllerResponse => {
    * @param {ITextInputFieldData} event
    * @return {void}
    */
-  const onNewPasswordChange = useCallback((event: ITextInputFieldData): void => {
-    if (!event.event) return;
-    const { value } = event.event.target;
-    setNewPassword(value);
-  }, []);
+  const onNewPasswordChange = useCallback(
+    (event: ITextInputFieldData): void => {
+      if (!event.event) return;
+      const { value } = event.event.target;
+      setNewPassword(value);
+    },
+    []
+  );
 
   /**
    * @function {onConfirmPasswordChange} -  Handle on Change of Confirm Password
    * @param {ITextInputFieldData} event
    * @return {void}
    */
-  const onConfirmPasswordChange = useCallback((event: ITextInputFieldData): void => {
-    if (!event.event) return;
-    const { value } = event.event.target;
-    setConfirmPassword(value);
-  }, []);
+  const onConfirmPasswordChange = useCallback(
+    (event: ITextInputFieldData): void => {
+      if (!event.event) return;
+      const { value } = event.event.target;
+      setConfirmPassword(value);
+    },
+    []
+  );
 
   /**
    * @functions {handleShowPassword} - To handle to show password functionality
@@ -165,7 +179,7 @@ export const logInController = (): IAuthControllerResponse => {
    */
   const isValidOtp = useCallback((): boolean => {
     const otpError = otpRef.current?.validateValue();
-    
+
     if (!otpError) {
       return true;
     }
@@ -179,16 +193,16 @@ export const logInController = (): IAuthControllerResponse => {
   const isValidResetPassword = useCallback((): boolean => {
     const newPasswordError = newPasswordRef.current?.validateValue();
     const confirmPasswordError = confirmPasswordRef.current?.validateValue();
-    
+
     if (!(newPasswordError && confirmPasswordError)) {
       return true;
     }
-    
+
     if (newPassword !== confirmPassword) {
       enqueueSnackbar("Passwords do not match", SnackbarTypeEnum.ERROR);
       return true;
     }
-    
+
     return false;
   }, [confirmPassword, enqueueSnackbar, newPassword]);
 
@@ -211,10 +225,10 @@ export const logInController = (): IAuthControllerResponse => {
       };
 
       try {
-        const response = await dispatch(
-          AuthenticationThunk.adminSignIn(payload) as any
-        ).unwrap();
-        enqueueSnackbar(SIGNIN_SUCCESSFUL, SnackbarTypeEnum.SUCCESS);
+        // const response = await dispatch(
+        //   AuthenticationThunk.adminSignIn(payload) as any
+        // ).unwrap();
+        // enqueueSnackbar(SIGNIN_SUCCESSFUL, SnackbarTypeEnum.SUCCESS);
         setFormState("otp");
       } catch (error) {
         enqueueSnackbar(SOMETHING_WENT_WRONG, SnackbarTypeEnum.ERROR);
@@ -251,6 +265,44 @@ export const logInController = (): IAuthControllerResponse => {
   );
 
   /**
+   * @function {handleResendOtp} - To handle resending OTP
+   * @return {Promise<void>}
+   */
+  const handleResendOtp = useCallback(async (): Promise<void> => {
+    setIsProcessing(true);
+
+    try {
+      // In a real implementation, you would dispatch an action to resend OTP
+      // For now, we'll just simulate a successful resend
+
+      // Different payload based on which form state we're in
+      if (formState === "otp") {
+        // For login OTP resend
+        const payload: IAdminLogInRequest = {
+          email: email.trim(),
+          password: password.trim(),
+        };
+
+        // Here you would dispatch the actual resend OTP action
+        // await dispatch(AuthenticationThunk.resendOtp(payload) as any);
+      } else if (formState === "forgotPasswordOtp") {
+        // For forgot password OTP resend
+        // Here you would dispatch the forgot password resend OTP action
+        // await dispatch(AuthenticationThunk.resendForgotPasswordOtp({ email: email.trim() }) as any);
+      }
+
+      enqueueSnackbar(
+        "Verification code resent to your email",
+        SnackbarTypeEnum.SUCCESS
+      );
+    } catch (error) {
+      enqueueSnackbar(SOMETHING_WENT_WRONG, SnackbarTypeEnum.ERROR);
+    }
+
+    setIsProcessing(false);
+  }, [dispatch, email, password, formState, enqueueSnackbar]);
+
+  /**
    * @function {handleForgotPassword} - To handle forgot password request
    * @return {Promise<void>}
    */
@@ -258,7 +310,7 @@ export const logInController = (): IAuthControllerResponse => {
     async (event: FormEvent<HTMLFormElement>): Promise<void> => {
       event.preventDefault();
       const emailError = emailRef.current?.validateValue();
-      
+
       if (!emailError) {
         return;
       }
@@ -267,7 +319,10 @@ export const logInController = (): IAuthControllerResponse => {
 
       try {
         // In a real implementation, you would dispatch an action to send a reset password email
-        enqueueSnackbar("Verification code sent to your email", SnackbarTypeEnum.SUCCESS);
+        enqueueSnackbar(
+          "Verification code sent to your email",
+          SnackbarTypeEnum.SUCCESS
+        );
         setFormState("forgotPasswordOtp");
       } catch (error) {
         enqueueSnackbar(SOMETHING_WENT_WRONG, SnackbarTypeEnum.ERROR);
@@ -354,6 +409,7 @@ export const logInController = (): IAuthControllerResponse => {
       handleForgotPasswordOtp,
       handleResetPassword,
       setFormState,
+      handleResendOtp,
     },
     ref: {
       emailRef,

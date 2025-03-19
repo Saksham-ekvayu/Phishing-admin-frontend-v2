@@ -14,7 +14,13 @@ import {
   faKey,
 } from "@fortawesome/free-solid-svg-icons";
 import TextInputField from "../textInputField";
-import { EMAIL_ADDRESS, PASSWORD, VERIFICATION_CODE } from "@/constants";
+import {
+  CONFIRM_PASSWORD,
+  EMAIL_ADDRESS,
+  NEW_PASSWORD,
+  PASSWORD,
+  VERIFICATION_CODE,
+} from "@/constants";
 import { logInController } from "./login.controller";
 import { ValidationHelper } from "@/helpers";
 
@@ -44,6 +50,7 @@ function LoginForm() {
     handleForgotPasswordOtp,
     handleResetPassword,
     setFormState,
+    handleResendOtp,
   } = handlers;
 
   const { emailRef, passwordRef, otpRef, newPasswordRef, confirmPasswordRef } =
@@ -117,14 +124,14 @@ function LoginForm() {
               <Button
                 type="submit"
                 disabled={isProcessing}
-                className="border bg-primary"
+                className="bg-primary"
               >
                 {isProcessing ? "Signing in..." : "Sign In"}
               </Button>
               <div className="text-center">
                 <Button
                   variant="link"
-                  className="text-sm text-blue-500"
+                  className="text-sm text-primary"
                   onClick={() => setFormState("forgotPassword")}
                 >
                   Forgot password?
@@ -166,13 +173,27 @@ function LoginForm() {
                   }}
                 />
               </div>
-              <Button type="submit" disabled={isProcessing}>
+              <Button
+                type="submit"
+                className="bg-primary"
+                disabled={isProcessing}
+              >
                 {isProcessing ? "Verifying..." : "Verify"}
               </Button>
               <div className="text-center">
                 <Button
                   variant="link"
-                  className="text-sm text-blue-500"
+                  className="text-sm text-primary"
+                  onClick={handleResendOtp}
+                  disabled={isProcessing}
+                >
+                  Resend verification code
+                </Button>
+              </div>
+              <div className="text-center">
+                <Button
+                  variant="link"
+                  className="text-sm text-primary"
                   onClick={() => setFormState("login")}
                 >
                   Back to login
@@ -193,6 +214,7 @@ function LoginForm() {
                 <TextInputField
                   type="email"
                   placeholder={EMAIL_ADDRESS}
+                  label={EMAIL_ADDRESS}
                   onChange={onEmailChange}
                   value={email}
                   ref={emailRef}
@@ -212,13 +234,17 @@ function LoginForm() {
                   }}
                 />
               </div>
-              <Button type="submit" disabled={isProcessing}>
+              <Button
+                type="submit"
+                className="bg-primary"
+                disabled={isProcessing}
+              >
                 {isProcessing ? "Sending..." : "Send Verification Code"}
               </Button>
               <div className="text-center">
                 <Button
                   variant="link"
-                  className="text-sm text-blue-500"
+                  className="text-sm text-primary"
                   onClick={() => setFormState("login")}
                 >
                   Back to login
@@ -240,6 +266,7 @@ function LoginForm() {
                 <TextInputField
                   type="text"
                   placeholder={VERIFICATION_CODE}
+                  label={VERIFICATION_CODE}
                   onChange={onOtpChange}
                   value={otp}
                   ref={otpRef}
@@ -259,13 +286,27 @@ function LoginForm() {
                   }}
                 />
               </div>
-              <Button type="submit" disabled={isProcessing}>
+              <Button
+                type="submit"
+                className="bg-primary"
+                disabled={isProcessing}
+              >
                 {isProcessing ? "Verifying..." : "Verify"}
               </Button>
               <div className="text-center">
                 <Button
                   variant="link"
-                  className="text-sm text-blue-500"
+                  className="text-sm text-primary"
+                  onClick={handleResendOtp}
+                  disabled={isProcessing}
+                >
+                  Resend verification code
+                </Button>
+              </div>
+              <div className="text-center">
+                <Button
+                  variant="link"
+                  className="text-sm text-primary"
                   onClick={() => setFormState("forgotPassword")}
                 >
                   Back
@@ -285,7 +326,8 @@ function LoginForm() {
               <div className="grid gap-2">
                 <TextInputField
                   type={showPassword ? "text" : "password"}
-                  placeholder="New Password"
+                  placeholder={NEW_PASSWORD}
+                  label={NEW_PASSWORD}
                   onChange={onNewPasswordChange}
                   value={newPassword}
                   ref={newPasswordRef}
@@ -322,7 +364,8 @@ function LoginForm() {
               <div className="grid gap-2">
                 <TextInputField
                   type={showPassword ? "text" : "password"}
-                  placeholder="Confirm Password"
+                  placeholder={CONFIRM_PASSWORD}
+                  label={CONFIRM_PASSWORD}
                   onChange={onConfirmPasswordChange}
                   value={confirmPassword}
                   ref={confirmPasswordRef}
@@ -356,13 +399,17 @@ function LoginForm() {
                   }}
                 />
               </div>
-              <Button type="submit" disabled={isProcessing}>
+              <Button
+                type="submit"
+                className="bg-primary"
+                disabled={isProcessing}
+              >
                 {isProcessing ? "Resetting..." : "Reset Password"}
               </Button>
               <div className="text-center">
                 <Button
                   variant="link"
-                  className="text-sm text-blue-500"
+                  className="text-sm text-primary"
                   onClick={() => setFormState("login")}
                 >
                   Back to login
