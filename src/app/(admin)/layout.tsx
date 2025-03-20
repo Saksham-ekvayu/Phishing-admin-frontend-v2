@@ -18,6 +18,15 @@ import {
   SidebarTrigger,
 } from "@/components/ui/sidebar";
 import { AppSidebar } from "@/components/layout/app-sidebar";
+import { NavUser } from "@/components";
+
+const data = {
+  user: {
+    name: "shadcn",
+    email: "m@example.com",
+    avatar: "/avatars/shadcn.jpg",
+  },
+};
 
 export default function DashboardLayout({
   children,
@@ -29,7 +38,7 @@ export default function DashboardLayout({
     <SidebarProvider>
       <AppSidebar />
       <SidebarInset className="md:ml-[185px]">
-        <header className="flex h-16 shrink-0 items-center gap-2 transition-[width,height] ease-linear group-has-[[data-collapsible=icon]]/sidebar-wrapper:h-12 border-b">
+        <header className="flex h-16 shrink-0 items-center justify-between gap-2 transition-[width,height] ease-linear group-has-[[data-collapsible=icon]]/sidebar-wrapper:h-12 border-b">
           <div className="flex items-center gap-2 px-4">
             <SidebarTrigger className="-ml-1 md:hidden" />
             <Separator orientation="vertical" className="mr-2 h-4 md:hidden" />
@@ -51,6 +60,9 @@ export default function DashboardLayout({
                 ))}
               </BreadcrumbList>
             </Breadcrumb>
+          </div>
+          <div className="w-60 mr-5">
+            <NavUser user={data.user} />
           </div>
         </header>
         <main>{children}</main>

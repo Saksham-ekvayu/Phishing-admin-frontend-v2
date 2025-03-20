@@ -1,6 +1,6 @@
-"use client"
+"use client";
 
-import * as React from "react"
+import * as React from "react";
 import {
   AudioWaveform,
   BookOpen,
@@ -12,27 +12,29 @@ import {
   PieChart,
   Settings2,
   SquareTerminal,
-} from "lucide-react"
+} from "lucide-react";
 
-import { NavMain } from "@/components/layout/nav-main"
-import { NavProjects } from "@/components/layout/nav-projects"
-import { NavUser } from "@/components/layout/nav-user"
-import { TeamSwitcher } from "@/components/layout/team-switcher"
+import { NavMain } from "@/components/layout/nav-main";
+import { NavProjects } from "@/components/layout/nav-projects";
+import { NavUser } from "@/components/layout/nav-user";
+import { TeamSwitcher } from "@/components/layout/team-switcher";
 import {
   Sidebar,
   SidebarContent,
   SidebarFooter,
   SidebarHeader,
   SidebarRail,
-} from "@/components/ui/sidebar"
+} from "@/components/ui/sidebar";
 
 // This is sample data.
 const data = {
-  user: {
-    name: "shadcn",
-    email: "m@example.com",
-    avatar: "/avatars/shadcn.jpg",
-  },
+  dashboard: [
+    {
+      name: "Dashboard",
+      url: "/",
+      icon: Frame,
+    },
+  ],
   teams: [
     {
       name: "Acme Inc",
@@ -52,44 +54,30 @@ const data = {
   ],
   navMain: [
     {
-      title: "Playground",
+      title: "Plugin",
       url: "#",
       icon: SquareTerminal,
       isActive: true,
       items: [
         {
-          title: "History",
-          url: "#",
+          title: "Available license",
+          url: "/plugin/available-license",
         },
         {
-          title: "Starred",
-          url: "#",
+          title: "Agent installed",
+          url: "/plugin/agent-installed",
         },
         {
-          title: "Settings",
-          url: "#",
+          title: "Allocated license",
+          url: "/plugin/allocated-license",
+        },
+        {
+          title: "All license report",
+          url: "/plugin/all-license-report",
         },
       ],
     },
-    {
-      title: "Models",
-      url: "#",
-      icon: Bot,
-      items: [
-        {
-          title: "Genesis",
-          url: "#",
-        },
-        {
-          title: "Explorer",
-          url: "#",
-        },
-        {
-          title: "Quantum",
-          url: "#",
-        },
-      ],
-    },
+
     {
       title: "Documentation",
       url: "#",
@@ -154,7 +142,7 @@ const data = {
       icon: Map,
     },
   ],
-}
+};
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   return (
@@ -163,13 +151,14 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         <TeamSwitcher teams={data.teams} />
       </SidebarHeader>
       <SidebarContent>
+        <NavProjects projects={data.dashboard} />
         <NavMain items={data.navMain} />
         <NavProjects projects={data.projects} />
       </SidebarContent>
-      <SidebarFooter>
+      {/* <SidebarFooter>
         <NavUser user={data.user} />
-      </SidebarFooter>
+      </SidebarFooter> */}
       <SidebarRail />
     </Sidebar>
-  )
+  );
 }
