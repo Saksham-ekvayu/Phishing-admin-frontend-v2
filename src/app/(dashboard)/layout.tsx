@@ -98,7 +98,7 @@ const NAVIGATION: Navigation = [
     icon: <FolderSpecialIcon />,
   },
   {
-    segment: "rogueDB",
+    segment: "rogue-db",
     title: "RogueDB",
     icon: <StorageIcon />,
     children: [
