@@ -184,11 +184,11 @@ const initialTheme = createTheme({
   },
 });
 
-interface AdminLayoutProps {
+export default function AdminLayout({
+  children,
+}: Readonly<{
   children: React.ReactNode;
-}
-
-export default function AdminLayout({ children }: AdminLayoutProps) {
+}>) {
   const router = useDemoRouter("/");
 
   // Use state for theme to avoid hydration mismatch
