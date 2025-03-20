@@ -29,12 +29,12 @@ import { Box } from "@mui/material";
 
 const NAVIGATION: Navigation = [
   {
-    segment: "",
+    segment: "admin",
     title: "Dashboard",
     icon: <DashboardIcon />,
   },
   {
-    segment: "plugin",
+    segment: "admin/plugin",
     title: "Plugin",
     icon: <ExtensionIcon />,
     children: [
@@ -61,22 +61,22 @@ const NAVIGATION: Navigation = [
     ],
   },
   {
-    segment: "phishing-mails",
+    segment: "admin/phishing-mails",
     title: "Phishing mails",
     icon: <EmailIcon />,
   },
   {
-    segment: "disputes",
+    segment: "admin/disputes",
     title: "Disputes",
     icon: <GavelIcon />,
   },
   {
-    segment: "report",
+    segment: "admin/report",
     title: "Report",
     icon: <AssessmentIcon />,
   },
   {
-    segment: "sandbox",
+    segment: "admin/sandbox",
     title: "Sandbox",
     icon: <SecurityIcon />,
     children: [
@@ -93,12 +93,12 @@ const NAVIGATION: Navigation = [
     ],
   },
   {
-    segment: "quarantine",
+    segment: "admin/quarantine",
     title: "Quarantine",
     icon: <FolderSpecialIcon />,
   },
   {
-    segment: "rogue-db",
+    segment: "admin/rogue-db",
     title: "RogueDB",
     icon: <StorageIcon />,
     children: [
@@ -120,7 +120,7 @@ const NAVIGATION: Navigation = [
     ],
   },
   {
-    segment: "logs-report",
+    segment: "admin/logs-report",
     title: "Logs report",
     icon: <BugReportIcon />,
     children: [
