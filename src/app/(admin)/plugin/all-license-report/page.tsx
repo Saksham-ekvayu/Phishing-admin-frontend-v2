@@ -1,11 +1,7 @@
-import React from 'react'
+import React from "react";
 
 function Page() {
-  return (
-    <>
-      all-license-report
-    </>
-  )
+  return <div>all-license-report</div>;
 }
 
-export default Page
+export default Page;

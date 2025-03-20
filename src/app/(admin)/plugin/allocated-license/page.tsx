@@ -1,11 +1,7 @@
-import React from 'react'
+import React from "react";
 
 function Page() {
-  return (
-    <>
-      allocated-license
-    </>
-  )
+  return <div>allocated-license</div>;
 }
 
-export default Page
+export default Page;

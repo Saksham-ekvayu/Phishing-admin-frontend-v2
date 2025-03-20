@@ -1,11 +1,7 @@
-import React from 'react'
+import React from "react";
 
 function Page() {
-  return (
-    <>
-      agent-installed
-    </>
-  )
+  return <div>agent-installed</div>;
 }
 
-export default Page
+export default Page;

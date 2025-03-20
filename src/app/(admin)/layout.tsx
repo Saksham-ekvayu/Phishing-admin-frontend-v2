@@ -1,8 +1,6 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import Box from "@mui/material/Box";
-import Typography from "@mui/material/Typography";
 import { createTheme } from "@mui/material/styles";
 import DashboardIcon from "@mui/icons-material/Dashboard";
 import ExtensionIcon from "@mui/icons-material/Extension"; // For Plugin
@@ -26,11 +24,12 @@ import ErrorIcon from "@mui/icons-material/Error"; // For Error logs
 import WarningIcon from "@mui/icons-material/Warning"; // For Exception logs
 import { AppProvider, type Navigation } from "@toolpad/core/AppProvider";
 import { DashboardLayout } from "@toolpad/core/DashboardLayout";
-import { useDemoRouter } from "@toolpad/core/internal";
+import { usePathname, useRouter } from "next/navigation";
+import { Box } from "@mui/material";
 
 const NAVIGATION: Navigation = [
   {
-    segment: "dashboard",
+    segment: "",
     title: "Dashboard",
     icon: <DashboardIcon />,
   },
@@ -189,7 +188,9 @@ export default function AdminLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const router = useDemoRouter("/");
+  // const router = useDemoRouter("/");
+  const router = useRouter();
+  const pathname = usePathname();
 
   // Use state for theme to avoid hydration mismatch
   const [theme, setTheme] = useState(initialTheme);
@@ -203,7 +204,6 @@ export default function AdminLayout({
       },
       colorSchemes: { light: true, dark: true },
       breakpoints: initialTheme.breakpoints,
-      // Add the missing required properties
       navigationBar: initialTheme.navigationBar,
       loader: initialTheme.loader,
     });
@@ -211,9 +211,23 @@ export default function AdminLayout({
     setTheme(fullTheme);
   }, []);
 
+  const adaptedRouter = {
+    pathname: pathname || "/",
+    searchParams: new URLSearchParams(),
+    push: (path: string) => router.push(path),
+    replace: (path: string) => router.replace(path),
+    prefetch: (path: string) => router.prefetch?.(path),
+    reload: () => router.refresh?.(),
+    navigate: (url: string | URL) => {
+      router.push(url.toString());
+    },
+  };
+
   return (
-    <AppProvider navigation={NAVIGATION} router={router} theme={theme}>
-      <DashboardLayout>{children}</DashboardLayout>
+    <AppProvider navigation={NAVIGATION} router={adaptedRouter} theme={theme}>
+      <DashboardLayout>
+        <Box className="p-2">{children}</Box>
+      </DashboardLayout>
     </AppProvider>
   );
 }
