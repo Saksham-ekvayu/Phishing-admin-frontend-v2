@@ -23,7 +23,7 @@ import EditIcon from "@mui/icons-material/Edit";
 import LockIcon from "@mui/icons-material/Lock";
 import PaletteIcon from "@mui/icons-material/Palette";
 import LogoutIcon from "@mui/icons-material/Logout";
-import SettingsIcon from "@mui/icons-material/Settings";
+import { useRouter } from "next/navigation";
 
 function CustomThemeSwitcher({ onClose }: { onClose: () => void }) {
   const { mode, setMode } = useColorScheme();
@@ -48,13 +48,16 @@ function CustomThemeSwitcher({ onClose }: { onClose: () => void }) {
 }
 
 export default function UserProfile() {
+  const router = useRouter();
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const [themeAnchorEl, setThemeAnchorEl] = useState<null | HTMLElement>(null);
 
   const open = Boolean(anchorEl);
   const themeOpen = Boolean(themeAnchorEl);
 
-  const handleClick = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+  const handleClick = (
+    event: React.MouseEvent<HTMLButtonElement, MouseEvent>
+  ) => {
     setAnchorEl(event.currentTarget);
   };
 
@@ -87,13 +90,13 @@ export default function UserProfile() {
         anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
         transformOrigin={{ vertical: "top", horizontal: "right" }}
       >
-        <MenuItem onClick={handleClose}>
+       <MenuItem onClick={() => { router.push("/profile/edit-profile"); handleClose(); }}>
           <ListItemIcon>
             <EditIcon fontSize="small" />
           </ListItemIcon>
           Edit Profile
         </MenuItem>
-        <MenuItem onClick={handleClose}>
+        <MenuItem onClick={() => { router.push("/change-password"); handleClose(); }}>
           <ListItemIcon>
             <LockIcon fontSize="small" />
           </ListItemIcon>
