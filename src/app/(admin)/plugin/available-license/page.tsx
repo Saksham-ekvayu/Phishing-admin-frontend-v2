@@ -1,7 +1,5 @@
 import React from "react";
 
-function Page() {
-  return <div>AvailableLicense</div>;
+export default function AvailableLicensePage() {
+  return <div>Available License </div>;
 }
-
-export default Page;
