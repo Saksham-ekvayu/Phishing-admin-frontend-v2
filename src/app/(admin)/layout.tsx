@@ -184,34 +184,12 @@ const initialTheme = createTheme({
   },
 });
 
-function DemoPageContent({ pathname }: { pathname: string }) {
-  return (
-    <Box
-      sx={{
-        py: 4,
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        textAlign: "center",
-      }}
-    >
-      <Typography>Dashboard content for {pathname}</Typography>
-    </Box>
-  );
+interface AdminLayoutProps {
+  children: React.ReactNode;
 }
 
-interface DemoProps {
-  /**
-   * Injected by the documentation to work in an iframe.
-   * Remove this when copying and pasting into your project.
-   */
-  window?: () => Window;
-}
-
-export default function DashboardLayoutBasic(props: DemoProps) {
-  const { window } = props;
-  const router = useDemoRouter("/dashboard");
-  const demoWindow = window !== undefined ? window() : undefined;
+export default function AdminLayout({ children }: AdminLayoutProps) {
+  const router = useDemoRouter("/");
 
   // Use state for theme to avoid hydration mismatch
   const [theme, setTheme] = useState(initialTheme);
@@ -234,15 +212,8 @@ export default function DashboardLayoutBasic(props: DemoProps) {
   }, []);
 
   return (
-    <AppProvider
-      navigation={NAVIGATION}
-      router={router}
-      theme={theme}
-      window={demoWindow}
-    >
-      <DashboardLayout>
-        <DemoPageContent pathname={router.pathname} />
-      </DashboardLayout>
+    <AppProvider navigation={NAVIGATION} router={router} theme={theme}>
+      <DashboardLayout>{children}</DashboardLayout>
     </AppProvider>
   );
 }
