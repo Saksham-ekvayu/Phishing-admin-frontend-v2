@@ -15,46 +15,116 @@ import { useDemoRouter } from "@toolpad/core/internal";
 
 const NAVIGATION: Navigation = [
   {
-    kind: "header",
-    title: "Main items",
-  },
-  {
     segment: "dashboard",
     title: "Dashboard",
     icon: <DashboardIcon />,
   },
   {
-    segment: "orders",
-    title: "Orders",
-    icon: <ShoppingCartIcon />,
-  },
-  {
-    kind: "divider",
-  },
-  {
-    kind: "header",
-    title: "Analytics",
-  },
-  {
-    segment: "reports",
-    title: "Reports",
+    segment: "plugin",
+    title: "Plugin",
     icon: <BarChartIcon />,
     children: [
       {
-        segment: "sales",
-        title: "Sales",
+        segment: "available-license",
+        title: "Available license",
         icon: <DescriptionIcon />,
       },
       {
-        segment: "traffic",
-        title: "Traffic",
+        segment: "agent-installed",
+        title: "Agent installed",
+        icon: <DescriptionIcon />,
+      },
+      {
+        segment: "allocated-license",
+        title: "Allocated license",
+        icon: <DescriptionIcon />,
+      },
+      {
+        segment: "all-license-report",
+        title: "All license report",
         icon: <DescriptionIcon />,
       },
     ],
   },
   {
-    segment: "integrations",
-    title: "Integrations",
+    segment: "phishing-mails",
+    title: "Phishing mails",
+    icon: <ShoppingCartIcon />,
+  },
+  {
+    segment: "disputes",
+    title: "Disputes",
+    icon: <ShoppingCartIcon />,
+  },
+  {
+    segment: "report",
+    title: "Report",
+    icon: <BarChartIcon />,
+  },
+  {
+    segment: "sandbox",
+    title: "Sandbox",
+    icon: <BarChartIcon />,
+    children: [
+      {
+        segment: "running-sandbox",
+        title: "Running Sandbox",
+        icon: <DescriptionIcon />,
+      },
+      {
+        segment: "completed-sandbox",
+        title: "Completed Sandbox",
+        icon: <DescriptionIcon />,
+      },
+    ],
+  },
+  {
+    segment: "quarantine",
+    title: "Quarantine",
+    icon: <LayersIcon />,
+  },
+  {
+    segment: "rogueDB",
+    title: "RogueDB",
+    icon: <BarChartIcon />,
+    children: [
+      {
+        segment: "urls",
+        title: "Urls",
+        icon: <DescriptionIcon />,
+      },
+      {
+        segment: "domains",
+        title: "Domains",
+        icon: <DescriptionIcon />,
+      },
+      {
+        segment: "mails",
+        title: "Mails",
+        icon: <DescriptionIcon />,
+      },
+    ],
+  },
+  {
+    segment: "logs-report",
+    title: "Logs report",
+    icon: <BarChartIcon />,
+    children: [
+      {
+        segment: "exception-logs",
+        title: "Exception Logs",
+        icon: <DescriptionIcon />,
+      },
+      {
+        segment: "error-logs",
+        title: "Error Logs",
+        icon: <DescriptionIcon />,
+      },
+    ],
+  },
+  {
+    segment: "profile",
+    title: "Profile",
     icon: <LayersIcon />,
   },
 ];
