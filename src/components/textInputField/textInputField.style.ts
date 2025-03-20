@@ -16,6 +16,7 @@ export const CharacterCountTypography = styled(Typography, {
   return {};
 });
 
+
 export const StyledTextField = styled(TextField)(({ theme }) => {
   return {
     backgroundColor: "transparent",

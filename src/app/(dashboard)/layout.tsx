@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import { createTheme } from "@mui/material/styles";
-import DashboardIcon from "@mui/icons-material/Dashboard";
+import DashboardIcon from "@mui/icons-material/Dashboard"; // For Dashboard
 import ExtensionIcon from "@mui/icons-material/Extension"; // For Plugin
 import EmailIcon from "@mui/icons-material/Email"; // For Phishing mails
 import GavelIcon from "@mui/icons-material/Gavel"; // For Disputes
@@ -23,9 +23,12 @@ import MailIcon from "@mui/icons-material/Mail"; // For Mails
 import ErrorIcon from "@mui/icons-material/Error"; // For Error logs
 import WarningIcon from "@mui/icons-material/Warning"; // For Exception logs
 import { AppProvider, type Navigation } from "@toolpad/core/AppProvider";
-import { DashboardLayout } from "@toolpad/core/DashboardLayout";
+import { DashboardLayout, ThemeSwitcher } from "@toolpad/core/DashboardLayout";
 import { usePathname, useRouter } from "next/navigation";
-import { Box } from "@mui/material";
+import { AppBar, Box, Chip, Stack, Toolbar, Typography } from "@mui/material";
+import Image from "next/image";
+import ekvayu_logo from "@/assets/ekvayu-logo.png";
+import UserProfileHeader from "@/components/common/user-profile-header";
 
 const NAVIGATION: Navigation = [
   {
@@ -183,6 +186,16 @@ const initialTheme = createTheme({
   },
 });
 
+function CustomAppTitle() {
+  return (
+    <Stack direction="row" alignItems="center" spacing={2}>
+      <Image src={ekvayu_logo} alt="Ekvayu logo" className="w-8 h-8" />
+      <Typography variant="h6">Ekvayu Tech</Typography>
+      {/* <Chip size="small" label="BETA" color="info" /> */}
+    </Stack>
+  );
+}
+
 export default function DashboardLayoutBase({
   children,
 }: Readonly<{
@@ -224,8 +237,25 @@ export default function DashboardLayoutBase({
   };
 
   return (
-    <AppProvider navigation={NAVIGATION} router={adaptedRouter} theme={theme}>
-      <DashboardLayout>
+    <AppProvider
+      navigation={NAVIGATION}
+      router={adaptedRouter}
+      theme={theme}
+      // branding={{
+      //   logo: (
+      //     <Image src={ekvayu_logo} alt="Ekvayu logo" className="w-10 h-10" />
+      //   ),
+      //   title: "Ekvayu",
+      //   homeUrl: "/",
+      // }}
+    >
+      <DashboardLayout
+        slots={{
+          appTitle: CustomAppTitle,
+          toolbarActions: UserProfileHeader,
+          // sidebarFooter: SidebarFooter,
+        }}
+      >
         <Box className="p-2">{children}</Box>
       </DashboardLayout>
     </AppProvider>
