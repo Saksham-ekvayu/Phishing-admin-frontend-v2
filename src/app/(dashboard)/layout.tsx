@@ -183,7 +183,7 @@ const initialTheme = createTheme({
   },
 });
 
-export default function AdminLayout({
+export default function DashboardLayoutBase({
   children,
 }: Readonly<{
   children: React.ReactNode;
