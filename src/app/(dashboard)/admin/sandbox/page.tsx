@@ -1,5 +1,5 @@
 import { redirect } from "next/navigation";
 
 export default function Page() {
-  redirect("/plugin/available-license");
+  redirect("/sandbox/running-sandbox");
 }

@@ -18,7 +18,7 @@ export default function ReduxProvider({
 }) {
   return (
     <Provider store={store}>
-      <SettingsProvider>
+      {/* <SettingsProvider>
         <SnackbarProvider
           maxSnack={MAX_SNACKBAR_AMOUNT}
           autoHideDuration={2000}
@@ -28,11 +28,11 @@ export default function ReduxProvider({
             horizontal: SNACKBAR_HORIZONTAL_ALIGNMENT,
           }}
         >
-          <ThemeSelectorProvider>
+          <ThemeSelectorProvider> */}
             <main>{children}</main>
-          </ThemeSelectorProvider>
+          {/* </ThemeSelectorProvider>
         </SnackbarProvider>
-      </SettingsProvider>
+      </SettingsProvider> */}
     </Provider>
   );
 }
