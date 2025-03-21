@@ -11,7 +11,9 @@ import React, {
 } from "react";
 
 // Import dynamically with SSR disabled
-const ApexChartsPromise = import("apexcharts").then((mod) => mod.default);
+const ApexChartsPromise = import("apexcharts").then(
+  (mod) => mod?.default || mod
+);
 
 // Define a proper type for ApexCharts
 type ApexChartsType = typeof import("apexcharts");
@@ -24,14 +26,19 @@ export const ChartProvider: FC<IChartProvider> = ({ id, children }) => {
   const [ApexCharts, setApexCharts] = useState<ApexChartsType | null>(null);
 
   useEffect(() => {
+    let isMounted = true;
     if (typeof window !== "undefined") {
-      // Load ApexCharts only on the client
-      ApexChartsPromise.then((Apex) => setApexCharts(Apex));
+      ApexChartsPromise.then((Apex) => {
+        if (isMounted) setApexCharts(() => Apex);
+      });
     }
+    return () => {
+      isMounted = false;
+    };
   }, []);
 
   const downloadSVG = useCallback(() => {
-    if (!ApexCharts) return;
+    if (!ApexCharts || !ApexCharts.getChartByID) return;
     const chart = ApexCharts.getChartByID(id);
     chart?.exports?.exportToSVG();
   }, [id, ApexCharts]);
