@@ -109,7 +109,7 @@ export default function UserProfile() {
           Change Theme
         </MenuItem>
         <Divider />
-        <MenuItem onClick={handleClose}>
+        <MenuItem onClick={() => { router.push("/auth/login"); handleClose(); }}>
           <ListItemIcon>
             <LogoutIcon fontSize="small" />
           </ListItemIcon>
