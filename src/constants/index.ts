@@ -1,4 +1,3 @@
-export * from './theme';
 export * from './otpLength';
 export * from './pageMetaData';
 export * from './chipColor';
