@@ -48,11 +48,11 @@ export default function DashboardPage(): JSX.Element {
 
   return (
     <>
-      <PageHeader
+      {/* <PageHeader
         title="Dashboard"
         breadcrumbs={breadcrumbs}
         actions={<DatePicker onChange={handleDate} />}
-      />
+      /> */}
       <Spacing spacing={1.5} variant={SpacingEnum.BOTTOM} />
       <Grid container spacing={3}>
         <Grid item {...generateCardGrid}>
