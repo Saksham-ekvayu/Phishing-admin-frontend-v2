@@ -2,7 +2,7 @@
 
 import React, { JSX, useMemo } from "react";
 
-import { Spacing, SpacingEnum } from "@/components";
+import { BarGraph, Spacing, SpacingEnum } from "@/components";
 
 import { DashboardController } from "./dashboard.controller";
 import { Grid } from "@mui/material";
@@ -72,25 +72,9 @@ export default function DashboardPage(): JSX.Element {
           />
         </Grid>
       </Grid>
-      {/* <Grid container sx={{ my: 0 }} spacing={3}>
-        <Grid item xs={12} md={9}>
-          <div ref={ref}>
-            <Top5Journerys />
-          </div>
-        </Grid>
-
-        <Grid item xs={12} md={3}>
-          <div style={{ maxHeight: top5Measure.height }}>
-            <JourneyOverview />
-          </div>
-        </Grid>
-        <Grid item xs={12} md={6}>
-          <TotalMessage />
-        </Grid>
-        <Grid item xs={12} md={6}>
-          <UnidentifiedUttrances />
-        </Grid>
-      </Grid> */}
+      <div className="w-full mt-5">
+        <BarGraph />
+      </div>
     </>
   );
 }

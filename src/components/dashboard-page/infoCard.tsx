@@ -28,7 +28,13 @@ export function InfoCard(props: IInfoCardProps): ReactElement {
 
   return (
     <Card
-      sx={{ width: "100%", boxShadow: 4, borderRadius: 3, overflow: "hidden", }}
+      sx={{
+        width: "100%",
+        boxShadow: 4,
+        borderRadius: 3,
+        overflow: "hidden",
+        paddingTop:"5px"
+      }}
     >
       <CardHeader
         title={
@@ -36,16 +42,15 @@ export function InfoCard(props: IInfoCardProps): ReactElement {
             {title}
           </Typography>
         }
-        sx={{ py: 1.5, px: 2 }}
+        sx={{ py: 0.5, px: 2 }} // Reduced padding
       />
-      <CardContent>
+      <CardContent sx={{ py: 1, px: 2, "&:last-child": { pb: 1 } }}>
         <Box display="flex" justifyContent="space-between" alignItems="center">
-          <Typography variant="h5" fontWeight={700} color="">
+          <Typography variant="h5" fontWeight={700}>
             {data}
           </Typography>
           <Box
             sx={{
-              p: 0,
               height: "30px",
               width: "30px",
               display: "flex",
@@ -61,7 +66,7 @@ export function InfoCard(props: IInfoCardProps): ReactElement {
         </Box>
       </CardContent>
       <Divider />
-      <CardContent>
+      <CardContent sx={{ py: 1, px: 2, "&:last-child": { pb: 1 } }}>
         <Box display="flex" alignItems="center" justifyContent="space-between">
           <Typography
             sx={{
