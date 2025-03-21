@@ -23,9 +23,9 @@ import MailIcon from "@mui/icons-material/Mail"; // For Mails
 import ErrorIcon from "@mui/icons-material/Error"; // For Error logs
 import WarningIcon from "@mui/icons-material/Warning"; // For Exception logs
 import { AppProvider, type Navigation } from "@toolpad/core/AppProvider";
-import { DashboardLayout, ThemeSwitcher } from "@toolpad/core/DashboardLayout";
+import { DashboardLayout } from "@toolpad/core/DashboardLayout";
 import { usePathname, useRouter } from "next/navigation";
-import { AppBar, Box, Chip, Stack, Toolbar, Typography } from "@mui/material";
+import {  Box, Stack, Typography } from "@mui/material";
 import Image from "next/image";
 import ekvayu_logo from "@/assets/ekvayu-logo.png";
 import UserProfileHeader from "@/components/common/user-profile-header";

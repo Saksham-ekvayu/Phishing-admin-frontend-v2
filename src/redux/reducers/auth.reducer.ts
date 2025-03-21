@@ -1,7 +1,6 @@
 // Disabled for the Entire file due to no param reassing but its required in
 // Redux
-/* eslint-disable no-param-reassign */
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 
 import { ReducerEnum } from "@/enum";
 

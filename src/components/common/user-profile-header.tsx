@@ -8,7 +8,6 @@ import {
   IconButton,
   Stack,
   ListItemIcon,
-  Tooltip,
   Popover,
   Box,
   FormControl,

@@ -9,37 +9,41 @@ import React, {
   useEffect,
   useState,
 } from "react";
-import dynamic from "next/dynamic";
 
-// Dynamically import ApexCharts only on the client
-const ApexChartsPromise = import("apexcharts");
+// Import dynamically with SSR disabled
+const ApexChartsPromise = import("apexcharts").then((mod) => mod.default);
 
-import { IChartContext, IChartProvider, IApexChartExport } from "../interfaces";
+// Define a proper type for ApexCharts
+type ApexChartsType = typeof import("apexcharts");
+
+import { IChartContext, IChartProvider } from "../interfaces";
 
 export const ChartContext = createContext<IChartContext>({} as IChartContext);
 
 export const ChartProvider: FC<IChartProvider> = ({ id, children }) => {
-  const [ApexCharts, setApexCharts] = useState<any>(null);
+  const [ApexCharts, setApexCharts] = useState<ApexChartsType | null>(null);
 
   useEffect(() => {
-    // Ensure ApexCharts is loaded only on client-side
-    ApexChartsPromise.then((mod) => setApexCharts(mod.default));
+    if (typeof window !== "undefined") {
+      // Load ApexCharts only on the client
+      ApexChartsPromise.then((Apex) => setApexCharts(Apex));
+    }
   }, []);
 
   const downloadSVG = useCallback(() => {
-    if (!ApexCharts || typeof window === "undefined") return;
+    if (!ApexCharts) return;
     const chart = ApexCharts.getChartByID(id);
     chart?.exports?.exportToSVG();
   }, [id, ApexCharts]);
 
   const downloadPNG = useCallback(() => {
-    if (!ApexCharts || typeof window === "undefined") return;
+    if (!ApexCharts) return;
     const chart = ApexCharts.getChartByID(id);
     chart?.exports?.exportToPng();
   }, [id, ApexCharts]);
 
   const downloadCSV = useCallback(() => {
-    if (!ApexCharts || typeof window === "undefined") return;
+    if (!ApexCharts) return;
     const chart = ApexCharts.getChartByID(id);
     chart?.exports?.exportToCSV();
   }, [id, ApexCharts]);

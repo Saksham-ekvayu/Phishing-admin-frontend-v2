@@ -16,9 +16,8 @@ import {
 import PageHeader from "../pageHeader";
 
 export default function DashboardPage(): JSX.Element {
-  const { handlers, getters } = DashboardController();
-  const { ref, top5Measure, breadcrumbs } = getters;
-  const { handleDate } = handlers;
+  const { getters } = DashboardController();
+  const { breadcrumbs } = getters;
 
   const generateCardGrid = useMemo(() => {
     const count = 4;

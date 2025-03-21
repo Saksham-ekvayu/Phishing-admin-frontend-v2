@@ -6,7 +6,6 @@ import {
   SNACKBAR_VERTICAL_ALIGNMENT,
 } from "@/constants";
 import { SettingsProvider } from "@/context/settings.context";
-import { ThemeSelectorProvider } from "@/context/theme.context";
 import { store } from "@/redux";
 import { SnackbarProvider } from "notistack";
 import { Provider } from "react-redux";

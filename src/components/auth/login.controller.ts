@@ -4,16 +4,12 @@ import { AppRouterInstance } from "next/dist/shared/lib/app-router-context.share
 
 import { ITextInputFieldData, ITextInputFieldRef } from "@/components";
 import {
-  SIGNIN_SUCCESSFUL,
   SOMETHING_WENT_WRONG,
-  EMAIL_ADDRESS,
-  PASSWORD,
 } from "@/constants";
 import { SnackbarTypeEnum, RoutePathEnum } from "@/enum";
 import { useAppSnackbar } from "@/hooks/snackbar.hook";
-import { useAppDispatch, AuthenticationThunk } from "@/redux";
+import { useAppDispatch } from "@/redux";
 import { IAdminLogInRequest } from "@/interfaces";
-import { ValidationHelper } from "@/helpers/validation.helper";
 
 type FormState =
   | "login"
@@ -64,7 +60,7 @@ interface IAuthControllerResponse {
  * @controller {logInController}
  * @return {IAuthControllerResponse}
  */
-export const logInController = (): IAuthControllerResponse => {
+export const LogInController = (): IAuthControllerResponse => {
   // React State
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
@@ -218,10 +214,10 @@ export const logInController = (): IAuthControllerResponse => {
 
       setIsProcessing(true);
 
-      const payload: IAdminLogInRequest = {
-        email: email.trim(),
-        password: password.trim(),
-      };
+      // const payload: IAdminLogInRequest = {
+      //   email: email.trim(),
+      //   password: password.trim(),
+      // };
 
       try {
         // Uncomment this in production
@@ -240,10 +236,6 @@ export const logInController = (): IAuthControllerResponse => {
     [dispatch, email, enqueueSnackbar, isValidSubmittion, password]
   );
 
-  /**
-   * @function {handleOtpVerification} - To handle OTP verification
-   * @return {Promise<void>}
-   */
   const handleOtpVerification = useCallback(
     async (event: FormEvent<HTMLFormElement>): Promise<void> => {
       event.preventDefault();

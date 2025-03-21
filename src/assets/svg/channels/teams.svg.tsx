@@ -1,6 +1,3 @@
-/* eslint-disable no-tabs */
-/* eslint-disable react/style-prop-object */
-/* eslint-disable max-len */
 import React, { ReactElement } from 'react';
 
 /**
