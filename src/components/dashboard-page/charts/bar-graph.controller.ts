@@ -27,66 +27,45 @@ interface ITotalMessageControllerResponses {
 export function BarGraphController(): ITotalMessageControllerResponses {
   const theme: Theme = useTheme();
 
-  // Wrap the array initialization in useMemo to prevent recreation on every render
-  const barGraph = useMemo<IBarData[]>(
-    () => [
-      {
-        xAxisLabel: "Jan",
-        count: 150,
-        time: new Date("2024-01-01T00:00:00Z"),
-        day: 1,
-        month: 1,
-        year: 2024,
-      },
-      {
-        xAxisLabel: "Feb",
-        count: 280,
-        time: new Date("2024-02-01T00:00:00Z"),
-        day: 1,
-        month: 2,
-        year: 2024,
-      },
-      {
-        xAxisLabel: "Mar",
-        count: 200,
-        time: new Date("2024-03-01T00:00:00Z"),
-        day: 1,
-        month: 3,
-        year: 2024,
-      },
-      {
-        xAxisLabel: "Apr",
-        count: 350,
-        time: new Date("2024-04-01T00:00:00Z"),
-        day: 1,
-        month: 4,
-        year: 2024,
-      },
-      {
-        xAxisLabel: "May",
-        count: 420,
-        time: new Date("2024-05-01T00:00:00Z"),
-        day: 1,
-        month: 5,
-        year: 2024,
-      },
-    ],
-    []
-  ); // Empty dependency array since this data is static
+  // Generate 12 months data dynamically
+  const barGraph = useMemo<IBarData[]>(() => {
+    const months = [
+      "Jan",
+      "Feb",
+      "Mar",
+      "Apr",
+      "May",
+      "Jun",
+      "Jul",
+      "Aug",
+      "Sep",
+      "Oct",
+      "Nov",
+      "Dec",
+    ];
 
-  const chartData = barGraph?.length;
+    return months.map((month, index) => ({
+      xAxisLabel: month,
+      count: Math.floor(Math.random() * 500) + 100, // Random value between 100-600
+      time: new Date(
+        `2024-${(index + 1).toString().padStart(2, "0")}-01T00:00:00Z`
+      ),
+      day: 1,
+      month: index + 1,
+      year: 2024,
+    }));
+  }, []);
+
+  const chartData = barGraph.length;
   const enableButton = !!chartData;
 
   const series = useMemo(
-    () =>
-      barGraph?.map((graphData: IBarData) => graphData.count) || [],
+    () => barGraph.map((graphData) => graphData.count),
     [barGraph]
   );
 
   const columns = useMemo(
-    () =>
-      barGraph?.map((graphData: IBarData) => graphData.xAxisLabel) ||
-      [],
+    () => barGraph.map((graphData) => graphData.xAxisLabel),
     [barGraph]
   );
 
