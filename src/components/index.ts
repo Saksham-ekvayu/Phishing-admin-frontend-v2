@@ -5,7 +5,7 @@ export * from "./textInputField";
 export * from "./common";
 export * from "./spacing";
 export * from "./pageHeader";
-export * from "./dashboard-page/page";
+export * from "./dashboard-page";
 export * from "./breadcrumb";
 export * from "./charts";
 export * from "./error";
