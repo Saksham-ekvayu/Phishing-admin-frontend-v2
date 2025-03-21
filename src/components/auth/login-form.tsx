@@ -21,11 +21,11 @@ import {
   PASSWORD,
   VERIFICATION_CODE,
 } from "@/constants";
-import { logInController } from "./login.controller";
+import { LogInController } from "./login.controller";
 import { ValidationHelper } from "@/helpers";
 
 function LoginForm() {
-  const { getters, handlers, ref } = logInController();
+  const { getters, handlers, ref } = LogInController();
   const {
     email,
     password,
@@ -146,7 +146,7 @@ function LoginForm() {
           <form onSubmit={handleOtpVerification}>
             <div className="grid gap-4">
               <div className="text-center mb-4">
-                <p>We've sent a verification code to your email</p>
+                <p>We&apos;ve sent a verification code to your email</p>
                 <p className="font-medium">{email}</p>
               </div>
               <div className="grid gap-2">
@@ -259,7 +259,7 @@ function LoginForm() {
           <form onSubmit={handleForgotPasswordOtp}>
             <div className="grid gap-4">
               <div className="text-center mb-4">
-                <p>We've sent a verification code to your email</p>
+                <p>We&apos;ve sent a verification code to your email</p>
                 <p className="font-medium">{email}</p>
               </div>
               <div className="grid gap-2">

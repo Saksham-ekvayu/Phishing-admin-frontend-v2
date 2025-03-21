@@ -1,4 +1,3 @@
-/* eslint-disable max-len */
 import { alpha, useTheme } from '@mui/material';
 import React, { ReactElement } from 'react';
 

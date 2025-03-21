@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import axios, {
   AxiosResponse,
@@ -6,8 +6,6 @@ import axios, {
   InternalAxiosRequestConfig,
   AxiosError,
 } from "axios";
-import { useRouter } from "next/navigation";
-
 import { LocalStorageEnum, RoutePathEnum } from "@/enum";
 import { StorageUtill } from "@/utills";
 
@@ -18,7 +16,7 @@ axios.defaults.headers.common["Cache-Control"] = "no-cache";
 /** Api Helper Class */
 export class ApiHelper {
   /**
-   * @functions {send} -To make generic  api call i.e. post, get, delete, update etc.
+   * @functions {send} -To make generic API calls (POST, GET, DELETE, UPDATE, etc.)
    * @param {AxiosRequestConfig} config
    * @return {Promise<AxiosResponse<T>>}
    */
@@ -37,25 +35,27 @@ export class ApiHelper {
       (config: InternalAxiosRequestConfig) => {
         const newConfig = config;
         const token = StorageUtill.getLocalStorage(LocalStorageEnum.TOKEN);
-        newConfig.headers.Authorization = `Bearer ${token}`;
-        return config;
+        if (token) {
+          newConfig.headers.Authorization = `Bearer ${token}`;
+        }
+        return newConfig;
       },
-      (error: AxiosError) => Promise.resolve(error)
+      (error: AxiosError) => Promise.reject(error)
     );
   }
 
   /**
-   * @functions  {responseHandler} Manage response through interceptor
+   * @functions {responseHandler} Manage response through interceptor
    */
   public static responseHandler() {
-    const router = useRouter();
     axios.interceptors.response.use(
       (response: AxiosResponse) => response,
 
       (error: AxiosError) => {
         if (error?.response?.status === 401) {
-          router.push(window.location.origin + RoutePathEnum.SIGN_IN);
+          // Redirect using window.location instead of useRouter
           StorageUtill.clearLocalStorage();
+          window.location.href = RoutePathEnum.SIGN_IN;
         }
         return Promise.reject(error.response?.data);
       }
@@ -63,12 +63,14 @@ export class ApiHelper {
   }
 
   /**
-   *  @functions {init} To Initiate  api call
+   *  @functions {init} To initiate API call
    */
   public static init() {
     axios.defaults.baseURL = process.env.NEXT_PUBLIC_API_URL;
     ApiHelper.initRequestManager();
+    ApiHelper.responseHandler(); // Make sure this is initialized
   }
 }
 
+// Initialize API Helper
 ApiHelper.init();

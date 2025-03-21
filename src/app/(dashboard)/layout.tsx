@@ -23,9 +23,9 @@ import MailIcon from "@mui/icons-material/Mail"; // For Mails
 import ErrorIcon from "@mui/icons-material/Error"; // For Error logs
 import WarningIcon from "@mui/icons-material/Warning"; // For Exception logs
 import { AppProvider, type Navigation } from "@toolpad/core/AppProvider";
-import { DashboardLayout, ThemeSwitcher } from "@toolpad/core/DashboardLayout";
+import { DashboardLayout } from "@toolpad/core/DashboardLayout";
 import { usePathname, useRouter } from "next/navigation";
-import { AppBar, Box, Chip, Stack, Toolbar, Typography } from "@mui/material";
+import {  Box, Stack, Typography } from "@mui/material";
 import Image from "next/image";
 import ekvayu_logo from "@/assets/ekvayu-logo.png";
 import UserProfileHeader from "@/components/common/user-profile-header";
@@ -189,9 +189,19 @@ const initialTheme = createTheme({
 function CustomAppTitle() {
   return (
     <Stack direction="row" alignItems="center" spacing={2}>
-      <Image src={ekvayu_logo} alt="Ekvayu logo" className="w-8 h-8" />
-      <Typography variant="h6">Ekvayu Tech</Typography>
-      {/* <Chip size="small" label="BETA" color="info" /> */}
+      <Image
+        src={ekvayu_logo}
+        alt="Ekvayu logo"
+        className="w-5 h-5 md:w-6 md:h-6 lg:w-8 lg:h-8"
+      />
+      <Typography
+        variant="h6"
+        sx={{
+          fontSize: { xs: "14px", sm: "1rem", md: "20px" }, // Adjust font size for different screen sizes
+        }}
+      >
+        Ekvayu Tech
+      </Typography>
     </Stack>
   );
 }
@@ -237,18 +247,7 @@ export default function DashboardLayoutBase({
   };
 
   return (
-    <AppProvider
-      navigation={NAVIGATION}
-      router={adaptedRouter}
-      theme={theme}
-      // branding={{
-      //   logo: (
-      //     <Image src={ekvayu_logo} alt="Ekvayu logo" className="w-10 h-10" />
-      //   ),
-      //   title: "Ekvayu",
-      //   homeUrl: "/",
-      // }}
-    >
+    <AppProvider navigation={NAVIGATION} router={adaptedRouter} theme={theme}>
       <DashboardLayout
         slots={{
           appTitle: CustomAppTitle,

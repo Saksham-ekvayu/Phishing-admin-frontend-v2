@@ -1,7 +1,6 @@
-/* eslint-disable max-len */
 import assert from "assert";
 import React, { ReactElement } from "react";
-import { SvgWrapper } from "@/src/styles";
+// import { SvgWrapper } from "@/styles";
 
 interface IEbotifyFullIconProps {
   textColor?: string;
@@ -19,7 +18,7 @@ export function EbotifyFullIcon({
 }: IEbotifyFullIconProps): ReactElement {
   assert(height);
   return (
-    <SvgWrapper>
+    <>
       <svg
         version="1.1"
         id="Layer_1"
@@ -109,6 +108,6 @@ c0.86-0.1,1.86,0.1,1.93-1.03c0.16-2.51-0.71-5.66-1.58-7.98c-1.05-2.78-2.52-5.47-
 c-2.31,9.23,0.1,20.21,7.62,26.4C49.95,154.65,69.34,151.28,74.98,138.21z"
         />
       </svg>
-    </SvgWrapper>
+    </>
   );
 }

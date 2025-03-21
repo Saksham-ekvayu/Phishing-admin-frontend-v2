@@ -1,5 +1,6 @@
+import DashboardPage from "@/components/dashboard-page/page";
 import React from "react";
 
 export default function AdminDashboardPage() {
-  return <div>Admin Dashboard page</div>;
+  return <DashboardPage />;
 }

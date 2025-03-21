@@ -1,4 +1,3 @@
-/* eslint-disable max-len */
 
 /**
  * This library holdes all the regex we will be using in this project

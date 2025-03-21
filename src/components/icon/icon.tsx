@@ -10,6 +10,7 @@ interface IconProps {
   size?: "small" | "medium" | "large";
   onlyIcon?: boolean;
   className?: string;
+  label?: string;
 }
 
 export const Icon: React.FC<IconProps> = ({

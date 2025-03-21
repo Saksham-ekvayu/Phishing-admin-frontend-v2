@@ -1,4 +1,4 @@
-import { ThemeOptions, LinkProps as MuiLinkProps } from '@mui/material';
+import { ThemeOptions } from '@mui/material';
 
 // import { NextLinkComposed } from '@/components';
 
