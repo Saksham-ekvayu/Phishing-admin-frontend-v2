@@ -14,8 +14,8 @@ interface IInfoCardProps {
   icon: IconDefinition;
   data: number;
   title: string;
-  secondaryData?: number;
-  secondaryTitle?: string;
+  lastWeekCount?: number;
+  weekTitle?: string;
 }
 
 /**
@@ -24,7 +24,7 @@ interface IInfoCardProps {
  * @return {ReactElement}
  */
 export function InfoCard(props: IInfoCardProps): ReactElement {
-  const { icon, data, title, secondaryData, secondaryTitle } = props;
+  const { icon, data, title, lastWeekCount, weekTitle } = props;
 
   return (
     <Card
@@ -78,14 +78,14 @@ export function InfoCard(props: IInfoCardProps): ReactElement {
               fontWeight: 600,
             }}
           >
-            {secondaryData}
+            {lastWeekCount}
           </Typography>
           <Typography
             variant="caption"
             color="textSecondary"
             sx={{ fontWeight: 500 }}
           >
-            {secondaryTitle}
+            {weekTitle}
           </Typography>
         </Box>
       </CardContent>
