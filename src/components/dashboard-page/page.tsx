@@ -33,7 +33,7 @@ export default function DashboardPage(): JSX.Element {
 
   return (
     <>
-      <PageHeader title="Dashboard" actions={""} />
+      <PageHeader title="Dashboard" breadcrumbs={breadcrumbs} actions={""} />
       <Spacing spacing={1.5} variant={SpacingEnum.BOTTOM} />
       <Grid container spacing={3}>
         <Grid item {...generateCardGrid}>

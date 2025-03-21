@@ -6,41 +6,43 @@ import React, {
   useCallback,
   useContext,
   useMemo,
-} from 'react';
+  useEffect,
+  useState,
+} from "react";
+import dynamic from "next/dynamic";
 
+// Dynamically import ApexCharts only on the client
+const ApexChartsPromise = import("apexcharts");
 
-import ApexCharts from 'apexcharts';
-
-import { IChartContext, IChartProvider, IApexChartExport } from '../interfaces';
+import { IChartContext, IChartProvider, IApexChartExport } from "../interfaces";
 
 export const ChartContext = createContext<IChartContext>({} as IChartContext);
 
-/**
- * Chart Provider
- * @param {IChartProvider}param
- * @return {ReactElement}
- */
 export const ChartProvider: FC<IChartProvider> = ({ id, children }) => {
-  const downloadSVG = useCallback(() => {
-    const { ctx } = ApexCharts.getChartByID(id)
-      ?.exports as unknown as IApexChartExport;
+  const [ApexCharts, setApexCharts] = useState<any>(null);
 
-    ctx.exports.exportToSVG();
-  }, [id]);
+  useEffect(() => {
+    // Ensure ApexCharts is loaded only on client-side
+    ApexChartsPromise.then((mod) => setApexCharts(mod.default));
+  }, []);
+
+  const downloadSVG = useCallback(() => {
+    if (!ApexCharts || typeof window === "undefined") return;
+    const chart = ApexCharts.getChartByID(id);
+    chart?.exports?.exportToSVG();
+  }, [id, ApexCharts]);
 
   const downloadPNG = useCallback(() => {
-    const { ctx } = ApexCharts.getChartByID(id)
-      ?.exports as unknown as IApexChartExport;
-
-    ctx.exports.exportToPng();
-  }, [id]);
+    if (!ApexCharts || typeof window === "undefined") return;
+    const chart = ApexCharts.getChartByID(id);
+    chart?.exports?.exportToPng();
+  }, [id, ApexCharts]);
 
   const downloadCSV = useCallback(() => {
-    const { ctx } = ApexCharts.getChartByID(id)
-      ?.exports as unknown as IApexChartExport;
-
-    ctx.exportToCSV();
-  }, [id]);
+    if (!ApexCharts || typeof window === "undefined") return;
+    const chart = ApexCharts.getChartByID(id);
+    chart?.exports?.exportToCSV();
+  }, [id, ApexCharts]);
 
   const value = useMemo(
     () => ({
@@ -51,7 +53,7 @@ export const ChartProvider: FC<IChartProvider> = ({ id, children }) => {
         csv: downloadCSV,
       },
     }),
-    [downloadCSV, downloadPNG, downloadSVG, id],
+    [downloadCSV, downloadPNG, downloadSVG, id]
   );
 
   return (

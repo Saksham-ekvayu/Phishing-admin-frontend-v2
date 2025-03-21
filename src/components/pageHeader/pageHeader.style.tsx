@@ -12,5 +12,5 @@ export const GridActionItem = styled(Grid)(({ theme }) => ({
 
 export const PageHeaderBox = styled(Box)(({ theme }) => ({
   width: '100%',
-  marginBottom: theme.spacing(3),
+  marginBottom: theme.spacing(1),
 }));

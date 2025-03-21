@@ -26,8 +26,12 @@ export function PageHeader(props: IPageHeader): ReactElement {
     <PageHeaderBox>
       <Grid container justifyContent="space-between">
         <Grid item>
-          <Typography variant="h4">{title}</Typography>
-          <Breadcrumb breadcrumbs={breadcrumbs ? breadcrumbs : []} />
+          <Typography variant="h5" sx={{ fontWeight: 500 }}>
+            {title}
+          </Typography>
+          {breadcrumbs && (
+            <Breadcrumb breadcrumbs={breadcrumbs ? breadcrumbs : []} />
+          )}
         </Grid>
         <GridActionItem item>{actions}</GridActionItem>
       </Grid>

@@ -75,12 +75,41 @@ export default function UserProfile() {
 
   return (
     <Stack direction="row" alignItems="center" spacing={1}>
-      <IconButton onClick={handleClick} sx={{ p: 0 }}>
-        <Avatar alt="User" src="/path-to-user-image.jpg" />
-        <Typography variant="body1" sx={{ ml: 1 }}>
-          John Doe
+      <IconButton
+        onClick={handleClick}
+        sx={{
+          p: 0,
+          display: "flex",
+          alignItems: "center",
+          minWidthwidth: { xs: "120px", sm: "160px", md: "200px" },
+        }}
+      >
+        <Avatar
+          alt="User"
+          src="/path-to-user-image.jpg"
+          sx={{
+            width: { xs: "30px", sm: "40px", md: "50px" }, // Adjust avatar size based on screen width
+            height: { xs: "30px", sm: "40px", md: "50px" }, // Keep width and height equal
+          }}
+        />
+        <Typography
+          variant="body1"
+          sx={{
+            ml: 1, // Margin for spacing
+            fontSize: { xs: "12px", sm: "14px", md: "16px" }, // Adjust font size based on screen width
+            whiteSpace: "nowrap", // Prevents text from wrapping
+            overflow: "hidden", // Hides overflow text
+            textOverflow: "ellipsis", // Adds "..." for truncated text
+            maxWidth: { xs: "80px", sm: "120px", md: "150px" }, // Set max width for truncation
+          }}
+        >
+          John Doe ugfcb uhgv
         </Typography>
-        <ArrowDropDownIcon />
+        <ArrowDropDownIcon
+          sx={{
+            fontSize: { xs: "16px", sm: "20px" }, // Adjust icon size
+          }}
+        />
       </IconButton>
 
       <Menu
@@ -90,13 +119,23 @@ export default function UserProfile() {
         anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
         transformOrigin={{ vertical: "top", horizontal: "right" }}
       >
-       <MenuItem onClick={() => { router.push("/profile/edit-profile"); handleClose(); }}>
+        <MenuItem
+          onClick={() => {
+            router.push("/profile/edit-profile");
+            handleClose();
+          }}
+        >
           <ListItemIcon>
             <EditIcon fontSize="small" />
           </ListItemIcon>
           Edit Profile
         </MenuItem>
-        <MenuItem onClick={() => { router.push("/change-password"); handleClose(); }}>
+        <MenuItem
+          onClick={() => {
+            router.push("/change-password");
+            handleClose();
+          }}
+        >
           <ListItemIcon>
             <LockIcon fontSize="small" />
           </ListItemIcon>
@@ -109,7 +148,12 @@ export default function UserProfile() {
           Change Theme
         </MenuItem>
         <Divider />
-        <MenuItem onClick={() => { router.push("/auth/login"); handleClose(); }}>
+        <MenuItem
+          onClick={() => {
+            router.push("/auth/login");
+            handleClose();
+          }}
+        >
           <ListItemIcon>
             <LogoutIcon fontSize="small" />
           </ListItemIcon>
