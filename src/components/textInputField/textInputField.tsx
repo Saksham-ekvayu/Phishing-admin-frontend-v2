@@ -77,11 +77,12 @@ interface IProps extends BaseTextFieldProps {
 }
 
 /**
- * @component {Text Input Field}
+ * @component {TextInputField}
  * @param {IProps}
  * @param {ForwardedRef<ITextInputFieldRef>}
  * @return {ForwardRefExoticComponent}
  */
+
 export const TextInputField = forwardRef(
   (props: IProps, ref: ForwardedRef<ITextInputFieldRef>) => {
     const { value, multiline, InputProps, onChange, validation, ...rest } =
@@ -117,5 +118,7 @@ export const TextInputField = forwardRef(
     );
   }
 );
+
+TextInputField.displayName = "TextInputField";
 
 export default TextInputField;

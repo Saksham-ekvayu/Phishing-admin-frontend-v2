@@ -1,4 +1,4 @@
-import { RoutePathEnum } from '@/src/enum';
+import { RoutePathEnum } from '@/enum';
 
 export interface IBreadcrumbsKeyString {
   [key: string]: string;

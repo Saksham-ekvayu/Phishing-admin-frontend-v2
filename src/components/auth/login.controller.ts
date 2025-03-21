@@ -3,13 +3,9 @@ import { useRouter } from "next/navigation";
 import { AppRouterInstance } from "next/dist/shared/lib/app-router-context.shared-runtime";
 
 import { ITextInputFieldData, ITextInputFieldRef } from "@/components";
-import {
-  SOMETHING_WENT_WRONG,
-} from "@/constants";
+import { SOMETHING_WENT_WRONG } from "@/constants";
 import { SnackbarTypeEnum, RoutePathEnum } from "@/enum";
 import { useAppSnackbar } from "@/hooks/snackbar.hook";
-import { useAppDispatch } from "@/redux";
-import { IAdminLogInRequest } from "@/interfaces";
 
 type FormState =
   | "login"
@@ -72,7 +68,6 @@ export const LogInController = (): IAuthControllerResponse => {
   const [confirmPassword, setConfirmPassword] = useState<string>("");
 
   // Redux State
-  const dispatch = useAppDispatch();
 
   // React Refs
   const emailRef = useRef<ITextInputFieldRef>(null);
@@ -225,15 +220,15 @@ export const LogInController = (): IAuthControllerResponse => {
         //   AuthenticationThunk.adminSignIn(payload) as any
         // ).unwrap();
         // enqueueSnackbar(SIGNIN_SUCCESSFUL, SnackbarTypeEnum.SUCCESS);
-        
+
         // For demo purposes
         setFormState("otp");
-      } catch (error) {
+      } catch {
         enqueueSnackbar(SOMETHING_WENT_WRONG, SnackbarTypeEnum.ERROR);
       }
       setIsProcessing(false);
     },
-    [dispatch, email, enqueueSnackbar, isValidSubmittion, password]
+    [enqueueSnackbar, isValidSubmittion]
   );
 
   const handleOtpVerification = useCallback(
@@ -250,7 +245,7 @@ export const LogInController = (): IAuthControllerResponse => {
         // For now, we'll just simulate a successful verification
         enqueueSnackbar("Verification successful", SnackbarTypeEnum.SUCCESS);
         router.push(RoutePathEnum.HOME || "/");
-      } catch (error) {
+      } catch {
         enqueueSnackbar(SOMETHING_WENT_WRONG, SnackbarTypeEnum.ERROR);
       }
       setIsProcessing(false);
@@ -270,11 +265,10 @@ export const LogInController = (): IAuthControllerResponse => {
       // Different payload based on which form state we're in
       if (formState === "otp") {
         // For login OTP resend
-        const payload: IAdminLogInRequest = {
-          email: email.trim(),
-          password: password.trim(),
-        };
-
+        // const payload: IAdminLogInRequest = {
+        //   email: email.trim(),
+        //   password: password.trim(),
+        // };
         // Here you would dispatch the actual resend OTP action
         // await dispatch(AuthenticationThunk.resendOtp(payload) as any);
       } else if (formState === "forgotPasswordOtp") {
@@ -286,12 +280,12 @@ export const LogInController = (): IAuthControllerResponse => {
         "Verification code resent to your email",
         SnackbarTypeEnum.SUCCESS
       );
-    } catch (error) {
+    } catch {
       enqueueSnackbar(SOMETHING_WENT_WRONG, SnackbarTypeEnum.ERROR);
     }
 
     setIsProcessing(false);
-  }, [email, password, formState, enqueueSnackbar]);
+  }, [formState, enqueueSnackbar]);
 
   /**
    * @function {handleForgotPassword} - To handle forgot password request
@@ -311,18 +305,18 @@ export const LogInController = (): IAuthControllerResponse => {
       try {
         // In a real implementation, you would dispatch an action to send a reset password email
         // await dispatch(AuthenticationThunk.forgotPassword({ email: email.trim() }) as any);
-        
+
         enqueueSnackbar(
           "Verification code sent to your email",
           SnackbarTypeEnum.SUCCESS
         );
         setFormState("forgotPasswordOtp");
-      } catch (error) {
+      } catch {
         enqueueSnackbar(SOMETHING_WENT_WRONG, SnackbarTypeEnum.ERROR);
       }
       setIsProcessing(false);
     },
-    [enqueueSnackbar, email]
+    [enqueueSnackbar]
   );
 
   /**
@@ -340,19 +334,19 @@ export const LogInController = (): IAuthControllerResponse => {
 
       try {
         // In a real implementation, you would verify the OTP
-        // await dispatch(AuthenticationThunk.verifyForgotPasswordOtp({ 
+        // await dispatch(AuthenticationThunk.verifyForgotPasswordOtp({
         //   email: email.trim(),
-        //   otp: otp.trim() 
+        //   otp: otp.trim()
         // }) as any);
-        
+
         enqueueSnackbar("Verification successful", SnackbarTypeEnum.SUCCESS);
         setFormState("resetPassword");
-      } catch (error) {
+      } catch {
         enqueueSnackbar(SOMETHING_WENT_WRONG, SnackbarTypeEnum.ERROR);
       }
       setIsProcessing(false);
     },
-    [enqueueSnackbar, isValidOtp, email, otp]
+    [enqueueSnackbar, isValidOtp]
   );
 
   /**
@@ -375,18 +369,18 @@ export const LogInController = (): IAuthControllerResponse => {
         //   otp: otp.trim(),
         //   newPassword: newPassword.trim()
         // }) as any);
-        
+
         enqueueSnackbar("Password reset successful", SnackbarTypeEnum.SUCCESS);
         setFormState("login");
         setNewPassword("");
         setConfirmPassword("");
         setOtp("");
-      } catch (error) {
+      } catch {
         enqueueSnackbar(SOMETHING_WENT_WRONG, SnackbarTypeEnum.ERROR);
       }
       setIsProcessing(false);
     },
-    [enqueueSnackbar, isValidResetPassword, email, otp, newPassword]
+    [enqueueSnackbar, isValidResetPassword]
   );
 
   return {

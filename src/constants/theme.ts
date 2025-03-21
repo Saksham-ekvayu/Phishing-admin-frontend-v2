@@ -2,14 +2,13 @@ import LightThemeIcon from "@/assets/svg/light-theme.svg";
 import DarkThemeIcon from "@/assets/svg/dark-theme.svg";
 import CannaThemeIcon from "@/assets/svg/canna-theme.svg";
 
-import { IThemeItem } from "@/components";
 import {
   cannaChatThemeOptions,
   darkThemeOptions,
   lightThemeOptions,
-} from "@/components/theme";
+} from "@/components";
 
-export const DEFAULT_THEME_LIST: IThemeItem[] = [
+export const DEFAULT_THEME_LIST = [
   {
     id: "canna",
     label: "Default",

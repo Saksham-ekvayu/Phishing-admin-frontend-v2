@@ -42,8 +42,10 @@ export function ChartContainer(props: IChartsContainerProps): JSX.Element {
    * handle click
    * @param  {MouseEvent<HTMLElement>} event
    */
-  const handleClick = (event: MouseEvent<HTMLElement>) => {
-    setAnchorEl(event.currentTarget);
+  const handleClick = (event?: MouseEvent<HTMLElement>) => {
+    if (event) {
+      setAnchorEl(event.currentTarget);
+    }
   };
 
   /**
@@ -68,7 +70,7 @@ export function ChartContainer(props: IChartsContainerProps): JSX.Element {
             {disableAction && (
               <Icon
                 icon={faEllipsisVertical}
-                onClick={handleClick}
+                onClick={() => handleClick()}
                 label="More Options"
               />
             )}

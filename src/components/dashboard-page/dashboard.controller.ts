@@ -1,12 +1,16 @@
 "use client";
 
-import { useMemo, useState } from "react";
-// import { useSnackbar } from "notistack";
+import { useMemo } from "react";
 import useMeasure, { RectReadOnly } from "react-use-measure";
 import { DateTime } from "luxon";
 import { RoutePathEnum } from "@/enum";
 import { IBreadcrumbDisplay } from "@/components";
 import { MeasureRefType } from "@/interfaces";
+
+interface DateRange {
+  startDate: DateTime;
+  endDate: DateTime;
+}
 
 interface IDashboardController {
   getters: {
@@ -15,7 +19,7 @@ interface IDashboardController {
     top5Measure: RectReadOnly;
   };
   handlers: {
-    handleDate: (date: any) => void;
+    handleDate: (dateRange: DateRange) => void;
   };
 }
 
@@ -24,20 +28,15 @@ interface IDashboardController {
  * @return {IDashboardController}
  */
 export function DashboardController(): IDashboardController {
-  const [sDate, setStartDate] = useState<DateTime>(
-    DateTime.now().minus({ days: 1 })
-  );
-  const [eDate, setEndDate] = useState<DateTime>(DateTime.now());
   const [ref, top5Measure] = useMeasure();
 
   /**
-   * handle date function
-   * @param {DateTime} startDate
-   * @param {DateTime} endDate
+   * Handle date function
+   * @param {DateRange} dateRange - Contains start and end date
    */
-  const handleDate = ({ startDate, endDate }: any) => {
-    setStartDate(startDate);
-    setEndDate(endDate);
+  const handleDate = ({ startDate, endDate }: DateRange) => {
+    console.log("Selected Date Range:", startDate.toISO(), endDate.toISO());
+    // You can update state or perform any action here
   };
 
   const breadcrumbs = useMemo(
