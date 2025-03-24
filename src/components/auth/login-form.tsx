@@ -3,7 +3,7 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import Image from "next/image";
-import loginPageBackground from "@/assets/login_page_background_2.jpg";
+import loginPageBackground from "@/assets/login_page_background_1.png";
 import { InputAdornment } from "@mui/material";
 import { Icon } from "../icon";
 import {
@@ -453,7 +453,7 @@ function LoginForm() {
       />
 
       <div className="z-10 w-full max-w-md mx-auto p-4">
-        <Card className="backdrop-blur-sm bg-white/40 shadow-lg border-0">
+        <Card className="backdrop-blur-sm bg-white/50 shadow-lg border-0">
           <CardHeader className="space-y-1">
             <CardTitle className="text-2xl font-bold text-center">
               {getFormTitle()}
