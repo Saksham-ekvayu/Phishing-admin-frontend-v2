@@ -3,7 +3,7 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import Image from "next/image";
-import loginPageBackground from "@/assets/login_page_background.png";
+import loginPageBackground from "@/assets/login_page_background_2.jpg";
 import { InputAdornment } from "@mui/material";
 import { Icon } from "../icon";
 import {
@@ -442,16 +442,18 @@ function LoginForm() {
   };
 
   return (
-    <div className="max-w-screen w-full mx-auto h-screen flex items-center justify-center">
+    <div className="max-w-screen w-full mx-auto h-screen flex items-center justify-center relative">
       <Image
         src={loginPageBackground}
         alt="Login page background image"
-        fill
-        className="w-full h-full object-cover"
+        width={1920} // Default resolution for fallback
+        height={1080} // Default resolution for fallback
+        loading="lazy"
+        className="w-screen h-screen object-cover absolute"
       />
 
-      <div className="relative z-10 w-full max-w-md p-4">
-        <Card className="backdrop-blur bg-white/50 shadow-lg border-0">
+      <div className="z-10 w-full max-w-md mx-auto p-4">
+        <Card className="backdrop-blur-sm bg-white/40 shadow-lg border-0">
           <CardHeader className="space-y-1">
             <CardTitle className="text-2xl font-bold text-center">
               {getFormTitle()}
