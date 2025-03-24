@@ -53,9 +53,11 @@ export class ApiHelper {
 
       (error: AxiosError) => {
         if (error?.response?.status === 401) {
-          // Redirect using window.location instead of useRouter
-          StorageUtill.clearLocalStorage();
-          window.location.href = RoutePathEnum.SIGN_IN;
+          // Check if window is defined (client-side only)
+          if (typeof window !== "undefined") {
+            StorageUtill.clearLocalStorage();
+            window.location.href = RoutePathEnum.SIGN_IN;
+          }
         }
         return Promise.reject(error.response?.data);
       }

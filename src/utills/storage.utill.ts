@@ -6,7 +6,9 @@ export class StorageUtill {
    * @param {string} value
    */
   public static setLocalStorage(key: string, value: string): void {
-    localStorage.setItem(key, value);
+    if (typeof window !== "undefined") {
+      localStorage.setItem(key, value);
+    }
   }
 
   /**
@@ -15,8 +17,11 @@ export class StorageUtill {
    * @return {string}
    */
   public static getLocalStorage(key: string): string {
-    const data = localStorage.getItem(key);
-    return data || "";
+    if (typeof window !== "undefined") {
+      const data = localStorage.getItem(key);
+      return data || "";
+    }
+    return "";
   }
 
   /**
