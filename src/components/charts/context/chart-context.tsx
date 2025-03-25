@@ -6,54 +6,73 @@ import React, {
   useCallback,
   useContext,
   useMemo,
-  useEffect,
-  useState,
 } from "react";
-
-// Import dynamically with SSR disabled
-const ApexChartsPromise = import("apexcharts").then(
-  (mod) => mod?.default || mod
-);
-
-// Define a proper type for ApexCharts
-type ApexChartsType = typeof import("apexcharts");
 
 import { IChartContext, IChartProvider } from "../interfaces";
 
 export const ChartContext = createContext<IChartContext>({} as IChartContext);
 
 export const ChartProvider: FC<IChartProvider> = ({ id, children }) => {
-  const [ApexCharts, setApexCharts] = useState<ApexChartsType | null>(null);
-
-  useEffect(() => {
-    let isMounted = true;
-    if (typeof window !== "undefined") {
-      ApexChartsPromise.then((Apex) => {
-        if (isMounted) setApexCharts(() => Apex);
-      });
-    }
-    return () => {
-      isMounted = false;
-    };
-  }, []);
+  // Instead of trying to load ApexCharts at the component level,
+  // we'll handle the chart operations directly in the callback functions
 
   const downloadSVG = useCallback(() => {
-    if (!ApexCharts || !ApexCharts.getChartByID) return;
-    const chart = ApexCharts.getChartByID(id);
-    chart?.exports?.exportToSVG();
-  }, [id, ApexCharts]);
+    if (typeof window === "undefined") return;
+
+    // Dynamically import ApexCharts only when the function is called
+    import("apexcharts")
+      .then((ApexChartsModule) => {
+        try {
+          const chart = ApexChartsModule.default.getChartByID(id);
+          if (chart && chart.exports) {
+            chart.exports.exportToSVG();
+          }
+        } catch (error) {
+          console.error("Error exporting SVG:", error);
+        }
+      })
+      .catch((error) => {
+        console.error("Failed to load ApexCharts:", error);
+      });
+  }, [id]);
 
   const downloadPNG = useCallback(() => {
-    if (!ApexCharts) return;
-    const chart = ApexCharts.getChartByID(id);
-    chart?.exports?.exportToPng();
-  }, [id, ApexCharts]);
+    if (typeof window === "undefined") return;
+
+    import("apexcharts")
+      .then((ApexChartsModule) => {
+        try {
+          const chart = ApexChartsModule.default.getChartByID(id);
+          if (chart && chart.exports) {
+            chart.exports.exportToPng();
+          }
+        } catch (error) {
+          console.error("Error exporting PNG:", error);
+        }
+      })
+      .catch((error) => {
+        console.error("Failed to load ApexCharts:", error);
+      });
+  }, [id]);
 
   const downloadCSV = useCallback(() => {
-    if (!ApexCharts) return;
-    const chart = ApexCharts.getChartByID(id);
-    chart?.exports?.exportToCSV();
-  }, [id, ApexCharts]);
+    if (typeof window === "undefined") return;
+
+    import("apexcharts")
+      .then((ApexChartsModule) => {
+        try {
+          const chart = ApexChartsModule.default.getChartByID(id);
+          if (chart && chart.exports) {
+            chart.exports.exportToCSV();
+          }
+        } catch (error) {
+          console.error("Error exporting CSV:", error);
+        }
+      })
+      .catch((error) => {
+        console.error("Failed to load ApexCharts:", error);
+      });
+  }, [id]);
 
   const value = useMemo(
     () => ({
