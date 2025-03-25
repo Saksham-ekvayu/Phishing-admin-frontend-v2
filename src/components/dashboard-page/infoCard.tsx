@@ -30,10 +30,10 @@ export function InfoCard(props: IInfoCardProps): ReactElement {
     <Card
       sx={{
         width: "100%",
-        boxShadow: 4,
-        borderRadius: 3,
+        boxShadow: 1,
+        borderRadius: 1,
         overflow: "hidden",
-        paddingTop:"5px"
+        paddingTop: "5px",
       }}
     >
       <CardHeader

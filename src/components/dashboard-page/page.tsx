@@ -41,7 +41,7 @@ export default function DashboardPage() {
           </Grid>
         ))}
       </Grid>
-      <div className="w-full mt-5">
+      <div className="w-fit mt-5">
         <BarGraph />
       </div>
     </>

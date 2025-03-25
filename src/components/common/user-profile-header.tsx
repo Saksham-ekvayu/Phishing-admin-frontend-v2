@@ -87,8 +87,8 @@ export default function UserProfile() {
           alt="User"
           src="/path-to-user-image.jpg"
           sx={{
-            width: { xs: "30px", sm: "40px", md: "50px" }, // Adjust avatar size based on screen width
-            height: { xs: "30px", sm: "40px", md: "50px" }, // Keep width and height equal
+            width: { xs: "30px", sm: "30px", md: "40px" }, // Adjust avatar size based on screen width
+            height: { xs: "30px", sm: "30px", md: "40px" }, // Keep width and height equal
           }}
         />
         <Typography

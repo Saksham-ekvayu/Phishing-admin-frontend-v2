@@ -27,7 +27,8 @@ export function BarGraph(): ReactElement {
       >
         <ChartBox>
           <Chart
-            height={500}
+            height={300}
+            width={700}
             options={chartOptions}
             series={[{ name: ChartsTooltipEnum.TOTAL_MESSAGE, data: series }]}
             type="bar"
