@@ -13,6 +13,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import PageHeader from "../pageHeader";
 import { LineGraph } from "./line-chart/line-graph";
+import { SlopeGraph } from "./slope-chart/slope-graph";
 
 export default function DashboardPage() {
   const { getters } = DashboardController();
@@ -49,6 +50,9 @@ export default function DashboardPage() {
           </Grid>
           <Grid item xs={12} md={6}>
             <LineGraph />
+          </Grid>
+          <Grid item xs={12} md={8}>
+            <SlopeGraph />
           </Grid>
         </Grid>
       </Box>
