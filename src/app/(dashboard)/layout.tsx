@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from "react";
 import { createTheme } from "@mui/material/styles";
 import { AppProvider, type Navigation } from "@toolpad/core/AppProvider";
-import { MuiIcons } from "@/components";
+import { MuiIcons } from "@/components/icon";
 import { DashboardLayout } from "@toolpad/core/DashboardLayout";
 import { usePathname, useRouter } from "next/navigation";
 import {  Box, Stack, Typography } from "@mui/material";

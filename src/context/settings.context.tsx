@@ -11,7 +11,7 @@ import React, {
   useCallback,
   JSX,
 } from "react";
-import { darkThemeOptions, lightThemeOptions } from "@/components";
+import { darkThemeOptions, lightThemeOptions } from "@/components/theme";
 
 export interface ISettings {
   direction?: "ltr" | "rtl";

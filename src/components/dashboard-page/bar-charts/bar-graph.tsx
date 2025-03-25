@@ -4,11 +4,9 @@ import React, { ReactElement } from "react";
 
 import { StringHelper } from "@/helpers";
 import { ChartsTooltipEnum } from "@/enum";
-import { Chart, ChartContainer } from "@/components";
-import ChartProvider from "@/components/charts/context/chart-context";
-
-import { ChartBox } from "./bar-graph.style";
 import { BarGraphController } from "./bar-graph.controller";
+import { Chart, ChartContainer, ChartProvider } from "@/components/charts";
+import { ChartBox } from "../chart-box";
 
 /**
  * Total Message Graph

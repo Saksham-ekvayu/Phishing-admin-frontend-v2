@@ -56,6 +56,10 @@ import RefreshIcon from "@mui/icons-material/Refresh";
 import HelpIcon from "@mui/icons-material/Help";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 
+import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
+import LockIcon from "@mui/icons-material/Lock";
+import PaletteIcon from "@mui/icons-material/Palette";
+
 /**
  * Export all icons for direct imports
  * Usage: import { DashboardIcon } from 'src/components/icon/mui-icons';
@@ -112,4 +116,8 @@ export const MuiIcons = {
   RefreshIcon,
   HelpIcon,
   NotificationsIcon,
+
+  ArrowDropDownIcon,
+  LockIcon,
+  PaletteIcon,
 };

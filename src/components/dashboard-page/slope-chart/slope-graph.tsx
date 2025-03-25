@@ -1,7 +1,8 @@
 import { ReactElement } from "react";
-import { ChartBox, ChartContainer, ChartProvider, Chart } from "@/components";
 import { StringHelper } from "@/helpers/string.helper";
 import { SlopeGraphController } from "./slope-graph.controller";
+import { Chart, ChartContainer, ChartProvider } from "@/components/charts";
+import { ChartBox } from "../chart-box";
 
 export function SlopeGraph(): ReactElement {
   const { getters } = SlopeGraphController();

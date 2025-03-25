@@ -3,7 +3,7 @@ import Lottie from "lottie-react";
 import { AnimationSegment } from "lottie-web";
 
 import { Typography } from "@mui/material";
-import { Spacing, SpacingEnum } from "@/components";
+import { Spacing, SpacingEnum } from "@/components/spacing";
 
 import { NoDataFoundWrapper } from "./noDataFound.style";
 

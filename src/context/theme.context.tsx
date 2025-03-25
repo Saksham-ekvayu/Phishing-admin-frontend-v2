@@ -13,7 +13,7 @@ import { CssBaseline, Theme, ThemeProvider, ThemeOptions } from "@mui/material";
 import { createTheme, responsiveFontSizes } from "@mui/material/styles";
 
 import { useSettings } from "./settings.context";
-import { baseThemeOptions } from "@/components/ui";
+import { baseThemeOptions } from "@/components/theme";
 
 interface IThemeSelectorContext {
   toggleDrawer: () => void;

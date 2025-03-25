@@ -4,7 +4,7 @@ import { useMemo } from "react";
 import { Theme, useTheme } from "@mui/material";
 import { ApexOptions } from "apexcharts";
 import { ChartsCsvHeaderEnum } from "@/enum";
-import { ThemeEnum } from "@/components";
+import { ThemeEnum } from "@/components/theme";
 
 export interface IBarData {
   time: Date;

@@ -1,8 +1,9 @@
 import { ReactElement } from "react";
 // import Chart from "react-apexcharts";
-import { ChartBox, ChartContainer, ChartProvider, Chart } from "@/components";
 import { StringHelper } from "@/helpers/string.helper";
 import { LineGraphController } from "./line-graph.controller";
+import { Chart, ChartContainer, ChartProvider } from "@/components/charts";
+import { ChartBox } from "../chart-box";
 
 export function LineGraph(): ReactElement {
   const { getters } = LineGraphController();

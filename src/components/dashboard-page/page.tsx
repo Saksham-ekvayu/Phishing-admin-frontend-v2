@@ -1,8 +1,6 @@
 "use client";
 
 import React from "react";
-import { BarGraph, Spacing, SpacingEnum } from "@/components";
-import { DashboardController } from "./dashboard.controller";
 import { Box, Grid } from "@mui/material";
 import { InfoCard } from "./infoCard";
 import {
@@ -11,7 +9,10 @@ import {
   faCheckCircle,
   faExclamationTriangle,
 } from "@fortawesome/free-solid-svg-icons";
+import Spacing, { SpacingEnum } from "../spacing";
 import PageHeader from "../pageHeader";
+import { DashboardController } from "./dashboard.controller";
+import { BarGraph } from "./bar-charts/bar-graph";
 import { LineGraph } from "./line-chart/line-graph";
 import { SlopeGraph } from "./slope-chart/slope-graph";
 

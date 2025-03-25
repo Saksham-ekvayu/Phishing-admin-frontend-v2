@@ -4,7 +4,7 @@ import { useMemo } from "react";
 import useMeasure, { RectReadOnly } from "react-use-measure";
 import { DateTime } from "luxon";
 import { RoutePathEnum } from "@/enum";
-import { IBreadcrumbDisplay } from "@/components";
+import { IBreadcrumbDisplay } from "@/components/breadcrumb";
 import { MeasureRefType } from "@/interfaces";
 
 interface DateRange {
