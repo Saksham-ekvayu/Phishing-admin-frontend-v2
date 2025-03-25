@@ -5,7 +5,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import Image from "next/image";
 import loginPageBackground from "@/assets/login_page_background_1.png";
 import { InputAdornment } from "@mui/material";
-import { Icon } from "../icon";
+import { Icon } from "../../common/icon";
 import {
   faEnvelope,
   faLock,
@@ -13,7 +13,7 @@ import {
   faEyeSlash,
   faKey,
 } from "@fortawesome/free-solid-svg-icons";
-import TextInputField from "../textInputField";
+import TextInputField from "../../common/textInputField";
 import {
   CONFIRM_PASSWORD,
   EMAIL_ADDRESS,

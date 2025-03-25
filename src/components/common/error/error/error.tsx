@@ -2,7 +2,7 @@ import React, { ReactElement } from "react";
 import Lottie from "lottie-react";
 import { Backdrop, Typography } from "@mui/material";
 
-import { Spacing, SpacingEnum } from "@/components/spacing";
+import { Spacing, SpacingEnum } from "@/components/common/spacing";
 
 import { ErrorWrapper } from "./error.style";
 

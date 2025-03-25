@@ -2,7 +2,10 @@ import { RefObject, useRef, useState, useCallback, FormEvent } from "react";
 import { useRouter } from "next/navigation";
 import { AppRouterInstance } from "next/dist/shared/lib/app-router-context.shared-runtime";
 
-import { ITextInputFieldData, ITextInputFieldRef } from "@/components/textInputField";
+import {
+  ITextInputFieldData,
+  ITextInputFieldRef,
+} from "@/components/common/textInputField";
 import { SOMETHING_WENT_WRONG } from "@/constants";
 import { SnackbarTypeEnum, RoutePathEnum } from "@/enum";
 import { useAppSnackbar } from "@/hooks/snackbar.hook";

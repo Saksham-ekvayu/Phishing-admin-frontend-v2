@@ -1,6 +1,6 @@
 export * from './dashboard.controller'
 export * from './infoCard'
-export * from './page'
+export * from './admin.dashboard'
 export * from './chart-box'
 
 export * from './bar-charts/bar-graph'

@@ -2,7 +2,11 @@ import { ReactElement } from "react";
 // import Chart from "react-apexcharts";
 import { StringHelper } from "@/helpers/string.helper";
 import { LineGraphController } from "./line-graph.controller";
-import { Chart, ChartContainer, ChartProvider } from "@/components/charts";
+import {
+  Chart,
+  ChartContainer,
+  ChartProvider,
+} from "@/components/common/charts";
 import { ChartBox } from "../chart-box";
 
 export function LineGraph(): ReactElement {

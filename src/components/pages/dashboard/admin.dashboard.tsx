@@ -9,14 +9,13 @@ import {
   faCheckCircle,
   faExclamationTriangle,
 } from "@fortawesome/free-solid-svg-icons";
-import Spacing, { SpacingEnum } from "../spacing";
-import PageHeader from "../pageHeader";
 import { DashboardController } from "./dashboard.controller";
 import { BarGraph } from "./bar-charts/bar-graph";
 import { LineGraph } from "./line-chart/line-graph";
 import { SlopeGraph } from "./slope-chart/slope-graph";
+import { PageHeader, Spacing, SpacingEnum } from "@/components/common";
 
-export default function DashboardPage() {
+export default function AdminDashboard() {
   const { getters } = DashboardController();
   const { breadcrumbs } = getters;
 

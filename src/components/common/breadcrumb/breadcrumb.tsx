@@ -4,9 +4,9 @@ import BaseBreadcrumbs from "@mui/material/Breadcrumbs";
 import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 
 import RoutePathEnum from "@/enum/routePaths.enum";
-import SpacingEnum from "@/components/spacing/enum";
-import Spacing from "@/components/spacing/spacing";
-import { Icon } from "@/components/icon";
+import SpacingEnum from "@/components/common/spacing/enum";
+import Spacing from "@/components/common/spacing/spacing";
+import { Icon } from "@/components/common/icon";
 import { StringHelper } from "@/helpers";
 
 import { BreadcrumbController } from "./breadcrumb.controller";

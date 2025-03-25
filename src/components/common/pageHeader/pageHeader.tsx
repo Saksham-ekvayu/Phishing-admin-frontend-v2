@@ -4,7 +4,7 @@ import React, { ReactElement, ReactNode } from "react";
 import { Grid, Typography } from "@mui/material";
 
 // import { usePage } from '@/context';
-import { Breadcrumb, IBreadcrumbDisplay } from "@/components/breadcrumb";
+import { Breadcrumb, IBreadcrumbDisplay } from "@/components/common/breadcrumb";
 
 import { GridActionItem, PageHeaderBox } from "./pageHeader.style";
 

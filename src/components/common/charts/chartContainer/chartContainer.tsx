@@ -4,7 +4,7 @@ import React, { JSX, memo, MouseEvent, ReactNode, useState } from "react";
 import { CardHeader, Divider, Menu, MenuItem } from "@mui/material";
 import { faEllipsisVertical } from "@fortawesome/free-solid-svg-icons";
 
-import { Icon } from "@/components/icon";
+import { Icon } from "@/components/common/icon";
 
 import { ChartCard } from "./chartContainer.style";
 import { useChart } from "../context/chart-context";

@@ -3,10 +3,10 @@
 import React, { useEffect, useState } from "react";
 import { createTheme } from "@mui/material/styles";
 import { AppProvider, type Navigation } from "@toolpad/core/AppProvider";
-import { MuiIcons } from "@/components/icon";
+import { MuiIcons } from "@/components/common/icon";
 import { DashboardLayout } from "@toolpad/core/DashboardLayout";
 import { usePathname, useRouter } from "next/navigation";
-import {  Box, Stack, Typography } from "@mui/material";
+import { Box, Stack, Typography } from "@mui/material";
 import Image from "next/image";
 import ekvayu_logo from "@/assets/ekvayu-logo.png";
 import UserProfileHeader from "@/components/common/user-profile-header";

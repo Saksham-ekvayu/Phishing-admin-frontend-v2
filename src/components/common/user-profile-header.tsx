@@ -18,7 +18,7 @@ import {
   Divider,
 } from "@mui/material";
 import { useRouter } from "next/navigation";
-import { MuiIcons } from "../icon";
+import { MuiIcons } from "./icon";
 
 function CustomThemeSwitcher({ onClose }: { onClose: () => void }) {
   const { mode, setMode } = useColorScheme();

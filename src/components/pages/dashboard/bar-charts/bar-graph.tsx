@@ -5,7 +5,11 @@ import React, { ReactElement } from "react";
 import { StringHelper } from "@/helpers";
 import { ChartsTooltipEnum } from "@/enum";
 import { BarGraphController } from "./bar-graph.controller";
-import { Chart, ChartContainer, ChartProvider } from "@/components/charts";
+import {
+  Chart,
+  ChartContainer,
+  ChartProvider,
+} from "@/components/common/charts";
 import { ChartBox } from "../chart-box";
 
 /**
