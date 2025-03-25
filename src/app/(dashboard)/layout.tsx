@@ -2,27 +2,8 @@
 
 import React, { useEffect, useState } from "react";
 import { createTheme } from "@mui/material/styles";
-import DashboardIcon from "@mui/icons-material/Dashboard"; // For Dashboard
-import ExtensionIcon from "@mui/icons-material/Extension"; // For Plugin
-import EmailIcon from "@mui/icons-material/Email"; // For Phishing mails
-import GavelIcon from "@mui/icons-material/Gavel"; // For Disputes
-import AssessmentIcon from "@mui/icons-material/Assessment"; // For Report
-import SecurityIcon from "@mui/icons-material/Security"; // For Sandbox
-import FolderSpecialIcon from "@mui/icons-material/FolderSpecial"; // For Quarantine
-import StorageIcon from "@mui/icons-material/Storage"; // For RogueDB
-import BugReportIcon from "@mui/icons-material/BugReport"; // For Logs report
-import PersonIcon from "@mui/icons-material/Person"; // For Profile
-import VpnKeyIcon from "@mui/icons-material/VpnKey"; // For License related items
-import ComputerIcon from "@mui/icons-material/Computer"; // For Agent installed
-import AssignmentIcon from "@mui/icons-material/Assignment"; // For Reports
-import PlayArrowIcon from "@mui/icons-material/PlayArrow"; // For Running Sandbox
-import DoneIcon from "@mui/icons-material/Done"; // For Completed Sandbox
-import LinkIcon from "@mui/icons-material/Link"; // For URLs
-import DomainIcon from "@mui/icons-material/Domain"; // For Domains
-import MailIcon from "@mui/icons-material/Mail"; // For Mails
-import ErrorIcon from "@mui/icons-material/Error"; // For Error logs
-import WarningIcon from "@mui/icons-material/Warning"; // For Exception logs
 import { AppProvider, type Navigation } from "@toolpad/core/AppProvider";
+import { MuiIcons } from "@/components";
 import { DashboardLayout } from "@toolpad/core/DashboardLayout";
 import { usePathname, useRouter } from "next/navigation";
 import {  Box, Stack, Typography } from "@mui/material";
@@ -34,115 +15,115 @@ const NAVIGATION: Navigation = [
   {
     segment: "admin",
     title: "Dashboard",
-    icon: <DashboardIcon />,
+    icon: <MuiIcons.DashboardIcon />,
   },
   {
     segment: "admin/plugin",
     title: "Plugin",
-    icon: <ExtensionIcon />,
+    icon: <MuiIcons.ExtensionIcon />,
     children: [
       {
         segment: "available-license",
         title: "Available license",
-        icon: <VpnKeyIcon />,
+        icon: <MuiIcons.VpnKeyIcon />,
       },
       {
         segment: "agent-installed",
         title: "Agent installed",
-        icon: <ComputerIcon />,
+        icon: <MuiIcons.ComputerIcon />,
       },
       {
         segment: "allocated-license",
         title: "Allocated license",
-        icon: <AssignmentIcon />,
+        icon: <MuiIcons.AssignmentIcon />,
       },
       {
         segment: "all-license-report",
         title: "All license report",
-        icon: <AssessmentIcon />,
+        icon: <MuiIcons.AssessmentIcon />,
       },
     ],
   },
   {
     segment: "admin/phishing-mails",
     title: "Phishing mails",
-    icon: <EmailIcon />,
+    icon: <MuiIcons.EmailIcon />,
   },
   {
     segment: "admin/disputes",
     title: "Disputes",
-    icon: <GavelIcon />,
+    icon: <MuiIcons.GavelIcon />,
   },
   {
     segment: "admin/report",
     title: "Report",
-    icon: <AssessmentIcon />,
+    icon: <MuiIcons.AssessmentIcon />,
   },
   {
     segment: "admin/sandbox",
     title: "Sandbox",
-    icon: <SecurityIcon />,
+    icon: <MuiIcons.SecurityIcon />,
     children: [
       {
         segment: "running-sandbox",
         title: "Running Sandbox",
-        icon: <PlayArrowIcon />,
+        icon: <MuiIcons.PlayArrowIcon />,
       },
       {
         segment: "completed-sandbox",
         title: "Completed Sandbox",
-        icon: <DoneIcon />,
+        icon: <MuiIcons.DoneIcon />,
       },
     ],
   },
   {
     segment: "admin/quarantine",
     title: "Quarantine",
-    icon: <FolderSpecialIcon />,
+    icon: <MuiIcons.FolderSpecialIcon />,
   },
   {
     segment: "admin/rogue-db",
     title: "RogueDB",
-    icon: <StorageIcon />,
+    icon: <MuiIcons.StorageIcon />,
     children: [
       {
         segment: "urls",
         title: "Urls",
-        icon: <LinkIcon />,
+        icon: <MuiIcons.LinkIcon />,
       },
       {
         segment: "domains",
         title: "Domains",
-        icon: <DomainIcon />,
+        icon: <MuiIcons.DomainIcon />,
       },
       {
         segment: "mails",
         title: "Mails",
-        icon: <MailIcon />,
+        icon: <MuiIcons.MailIcon />,
       },
     ],
   },
   {
     segment: "admin/logs-report",
     title: "Logs report",
-    icon: <BugReportIcon />,
+    icon: <MuiIcons.BugReportIcon />,
     children: [
       {
         segment: "exception-logs",
         title: "Exception Logs",
-        icon: <WarningIcon />,
+        icon: <MuiIcons.WarningIcon />,
       },
       {
         segment: "error-logs",
         title: "Error Logs",
-        icon: <ErrorIcon />,
+        icon: <MuiIcons.ErrorIcon />,
       },
     ],
   },
   {
     segment: "profile",
     title: "Profile",
-    icon: <PersonIcon />,
+    icon: <MuiIcons.PersonIcon />,
   },
 ];
 

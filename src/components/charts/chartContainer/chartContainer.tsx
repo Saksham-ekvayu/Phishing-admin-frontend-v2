@@ -59,12 +59,13 @@ export function ChartContainer(props: IChartsContainerProps): JSX.Element {
     <ChartCard
       height={height}
       sx={{
-        overflow: "visible",
+        overflow: "hidden",
       }}
     >
       <CardHeader
         title={title}
         subheader={description}
+        sx={{ p: 1 }}
         action={
           <>
             {disableAction && (

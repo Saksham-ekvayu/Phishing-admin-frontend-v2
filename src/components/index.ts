@@ -9,3 +9,4 @@ export * from "./dashboard-page";
 export * from "./breadcrumb";
 export * from "./charts";
 export * from "./error";
+export * from "./charts/context/chart-context";

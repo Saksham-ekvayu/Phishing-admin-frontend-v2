@@ -22,13 +22,13 @@ export function BarGraph(): ReactElement {
     <ChartProvider id={StringHelper.replaceSpaceToDash(title)}>
       <ChartContainer
         title={title}
-        description="This chart shows the total messages exchanged between the bot and the user."
+        description="This chart shows the total messages exchanged."
         disableAction={enableButton}
       >
-        <ChartBox>
+        <ChartBox height={300} sx={{ p: "0px 10px 10px 10px" }}>
           <Chart
-            height={300}
-            width={700}
+            height="100%"
+            width="100%"
             options={chartOptions}
             series={[{ name: ChartsTooltipEnum.TOTAL_MESSAGE, data: series }]}
             type="bar"

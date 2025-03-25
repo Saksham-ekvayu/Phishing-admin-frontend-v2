@@ -3,7 +3,7 @@
 import React from "react";
 import { BarGraph, Spacing, SpacingEnum } from "@/components";
 import { DashboardController } from "./dashboard.controller";
-import { Grid } from "@mui/material";
+import { Box, Grid } from "@mui/material";
 import { InfoCard } from "./infoCard";
 import {
   faEnvelope,
@@ -12,6 +12,7 @@ import {
   faExclamationTriangle,
 } from "@fortawesome/free-solid-svg-icons";
 import PageHeader from "../pageHeader";
+import { LineGraph } from "./line-chart/line-graph";
 
 export default function DashboardPage() {
   const { getters } = DashboardController();
@@ -41,9 +42,16 @@ export default function DashboardPage() {
           </Grid>
         ))}
       </Grid>
-      <div className="w-fit mt-5">
-        <BarGraph />
-      </div>
+      <Box sx={{ p: 0, mt: 2 }}>
+        <Grid container spacing={3}>
+          <Grid item xs={12} md={6}>
+            <BarGraph />
+          </Grid>
+          <Grid item xs={12} md={6}>
+            <LineGraph />
+          </Grid>
+        </Grid>
+      </Box>
     </>
   );
 }
