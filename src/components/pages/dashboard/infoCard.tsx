@@ -6,6 +6,7 @@ import {
   Divider,
   Typography,
   Box,
+  CircularProgress,
 } from "@mui/material";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { IconDefinition } from "@fortawesome/fontawesome-svg-core";
@@ -16,6 +17,8 @@ interface IInfoCardProps {
   title: string;
   lastWeekCount?: number;
   weekTitle?: string;
+  progress?: number; // Add progress prop (0-100)
+  progressColor?: string; // Optional color for progress bar
 }
 
 /**
@@ -24,7 +27,13 @@ interface IInfoCardProps {
  * @return {ReactElement}
  */
 export function InfoCard(props: IInfoCardProps): ReactElement {
-  const { icon, data, title, lastWeekCount, weekTitle } = props;
+  const {
+    icon,
+    data,
+    title,
+    progress = 0,
+    progressColor = "primary.main",
+  } = props;
 
   return (
     <Card
@@ -36,19 +45,21 @@ export function InfoCard(props: IInfoCardProps): ReactElement {
         paddingTop: "5px",
       }}
     >
-      <CardHeader
-        title={
-          <Typography variant="subtitle2" color="textSecondary">
-            {title}
-          </Typography>
-        }
-        sx={{ py: 0.5, px: 2 }} // Reduced padding
-      />
-      <CardContent sx={{ py: 1, px: 2, "&:last-child": { pb: 1 } }}>
-        <Box display="flex" justifyContent="space-between" alignItems="center">
-          <Typography variant="h5" fontWeight={700}>
-            {data}
-          </Typography>
+      <CardContent
+        sx={{
+          py: 1,
+          px: 2,
+          display: "flex",
+          justifyContent: "space-between",
+          "&:last-child": { pb: 1 },
+        }}
+      >
+        <Box
+          display="flex"
+          flexDirection="column"
+          justifyContent="space-between"
+          alignItems="self-start"
+        >
           <Box
             sx={{
               height: "30px",
@@ -56,37 +67,61 @@ export function InfoCard(props: IInfoCardProps): ReactElement {
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
-              bgcolor: "primary.dark",
-              color: "white",
-              borderRadius: "10%",
+              color: "primary.dark",
             }}
           >
-            <FontAwesomeIcon icon={icon} size="sm" />
+            <FontAwesomeIcon icon={icon} size="lg" />
           </Box>
+          <Typography variant="h5" fontWeight={700}>
+            {data}
+          </Typography>
+          <Typography variant="subtitle2" color="textPrimary">
+            {title}
+          </Typography>
         </Box>
-      </CardContent>
-      <Divider />
-      <CardContent sx={{ py: 1, px: 2, "&:last-child": { pb: 1 } }}>
-        <Box display="flex" alignItems="center" justifyContent="space-between">
-          <Typography
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            alignItems: "center",
+            position: "relative",
+          }}
+        >
+          {/* Circular Progress Bar */}
+          <CircularProgress
+            variant="determinate"
+            value={progress}
+            size={40}
+            thickness={4}
             sx={{
-              background: "rgba(76, 175, 80, 0.1)",
-              color: "#15B8A6",
-              px: 1.5,
-              py: 0.5,
-              borderRadius: 2,
-              fontWeight: 600,
+              color: progressColor,
+              "& .MuiCircularProgress-circle": {
+                strokeLinecap: "round",
+              },
+            }}
+          />
+          <Box
+            sx={{
+              top: 0,
+              left: 0,
+              bottom: 0,
+              right: 0,
+              position: "absolute",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
             }}
           >
-            {lastWeekCount}
-          </Typography>
-          <Typography
-            variant="caption"
-            color="textSecondary"
-            sx={{ fontWeight: 500 }}
-          >
-            {weekTitle}
-          </Typography>
+            <Typography
+              variant="caption"
+              component="div"
+              color="text.secondary"
+              fontWeight="bold"
+            >
+              {`${Math.round(progress)}%`}
+            </Typography>
+          </Box>
         </Box>
       </CardContent>
     </Card>

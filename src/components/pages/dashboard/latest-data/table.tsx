@@ -1,21 +1,18 @@
 import { ReactElement } from "react";
-import { 
-  Table, 
-  TableBody, 
-  TableCell, 
-  TableContainer, 
-  TableHead, 
-  TableRow, 
-  Paper, 
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  Paper,
   Chip,
-  Box
+  Box,
 } from "@mui/material";
 import { StringHelper } from "@/helpers/string.helper";
 import { TableController } from "./table.controller";
-import {
-  ChartContainer,
-  ChartProvider,
-} from "@/components/common/charts";
+import { ChartContainer, ChartProvider } from "@/components/common/charts";
 import { ChartBox } from "../chart-box";
 
 export function LatestData(): ReactElement {
@@ -25,14 +22,14 @@ export function LatestData(): ReactElement {
   // Function to determine chip color based on risk level
   const getRiskColor = (risk: string) => {
     switch (risk.toLowerCase()) {
-      case 'high':
-        return 'error';
-      case 'medium':
-        return 'warning';
-      case 'low':
-        return 'success';
+      case "high":
+        return "error";
+      case "medium":
+        return "warning";
+      case "low":
+        return "success";
       default:
-        return 'default';
+        return "default";
     }
   };
 
@@ -43,9 +40,12 @@ export function LatestData(): ReactElement {
         description="Latest phishing data analysis and statistics"
       >
         <ChartBox height={300}>
-          <TableContainer component={Paper} sx={{ maxHeight: 300, overflow: 'auto' }}>
+          <TableContainer
+            component={Paper}
+            sx={{ maxHeight: 300, overflow: "auto", paddingLeft:0.5 }}
+          >
             <Table stickyHeader size="small">
-              <TableHead sx={{background:"transparent"}}>
+              <TableHead>
                 <TableRow>
                   <TableCell>Email</TableCell>
                   <TableCell>Status</TableCell>
@@ -56,14 +56,21 @@ export function LatestData(): ReactElement {
               <TableBody>
                 {tableData.map((row) => (
                   <TableRow key={row.id} hover>
-                    <TableCell sx={{ maxWidth: 150, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+                    <TableCell
+                      sx={{
+                        maxWidth: 150,
+                        overflow: "hidden",
+                        textOverflow: "ellipsis",
+                        whiteSpace: "nowrap",
+                      }}
+                    >
                       {row.email}
                     </TableCell>
                     <TableCell>{row.status}</TableCell>
                     <TableCell>{row.date}</TableCell>
                     <TableCell>
-                      <Chip 
-                        label={row.risk} 
+                      <Chip
+                        label={row.risk}
                         color={getRiskColor(row.risk) as any}
                         size="small"
                         sx={{ minWidth: 70 }}

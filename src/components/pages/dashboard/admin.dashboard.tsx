@@ -21,10 +21,15 @@ export default function AdminDashboard() {
   const { breadcrumbs } = getters;
 
   const cardData = [
-    { title: "Total Mail", data: 689, icon: faEnvelope },
-    { title: "SandBox Testing", data: 3320, icon: faFlask },
-    { title: "CDR Complete", data: 851, icon: faCheckCircle },
-    { title: "Suspicious Documents", data: 1456, icon: faExclamationTriangle },
+    { title: "Total Mail", data: 689, icon: faEnvelope, progress: 40 },
+    { title: "SandBox Testing", data: 3320, icon: faFlask, progress: 55 },
+    { title: "CDR Complete", data: 851, icon: faCheckCircle, progress: 80 },
+    {
+      title: "Pandding CDR Documents",
+      data: 1456,
+      icon: faExclamationTriangle,
+      progress: 75,
+    },
   ];
 
   return (
@@ -38,8 +43,7 @@ export default function AdminDashboard() {
               data={card.data}
               title={card.title}
               icon={card.icon}
-              weekTitle="Last Week"
-              lastWeekCount={125}
+              progress={card.progress}
             />
           </Grid>
         ))}
