@@ -3,10 +3,7 @@
 import React from "react";
 
 import { StringHelper } from "@/helpers";
-import {
-  ChartContainer,
-  ChartProvider,
-} from "@/components/common/charts";
+import { ChartContainer, ChartProvider } from "@/components/common/charts";
 import { ChartBox } from "../chart-box";
 import { useTheme } from "@mui/material";
 import { ResponsiveChoropleth } from "@nivo/geo";
@@ -23,7 +20,7 @@ const GeographyChart = ({ isDashboard = false }) => {
         title={title}
         description="This chart shows the total phishings."
       >
-        <ChartBox height={250} sx={{ p: "0px 10px 10px 10px" }}>
+        <ChartBox height={250}>
           <ResponsiveChoropleth
             data={data}
             theme={{
@@ -51,6 +48,17 @@ const GeographyChart = ({ isDashboard = false }) => {
               legends: {
                 text: {
                   fill: "grey",
+                },
+              },
+              tooltip: {
+                container: {
+                  background:
+                    theme.palette.mode === "dark" ? "#1e1e1e" : "#ffffff",
+                  color: theme.palette.mode === "dark" ? "#ffffff" : "#333333",
+                  fontSize: 12,
+                  borderRadius: 2,
+                  boxShadow: "0 1px 2px rgba(0, 0, 0, 0.25)",
+                  padding: "5px 9px",
                 },
               },
             }}
