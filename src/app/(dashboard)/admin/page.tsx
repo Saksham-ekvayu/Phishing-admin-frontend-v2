@@ -1,6 +1,5 @@
-import DashboardPage from "@/components/dashboard-page/page";
-import React from "react";
+import AdminDashboard from "@/components/pages";
 
 export default function AdminDashboardPage() {
-  return <DashboardPage />;
+  return <AdminDashboard />;
 }

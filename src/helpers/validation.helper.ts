@@ -5,7 +5,7 @@ import {
   PLEASE_ENTER_VALID_PHONENUMBER,
   MUST_BE_IN_VALID_FORMAT,
 } from "@/constants";
-import { IValidationResponse } from "@/components/textInputField";
+import { IValidationResponse } from "@/components/common/textInputField";
 
 /**
  * This class holds all the validations Validation Helper
