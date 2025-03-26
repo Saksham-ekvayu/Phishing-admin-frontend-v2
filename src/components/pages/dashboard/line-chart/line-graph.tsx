@@ -20,7 +20,7 @@ export function LineGraph(): ReactElement {
         description="This chart shows stock price movement over time."
         disableAction={enableButton}
       >
-        <ChartBox height={200}>
+        <ChartBox height={300}>
           <Chart
             height="100%"
             width="100%"

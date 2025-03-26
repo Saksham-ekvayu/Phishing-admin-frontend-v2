@@ -27,7 +27,7 @@ export function BarGraph(): ReactElement {
         description="This chart shows the total messages exchanged."
         disableAction={enableButton}
       >
-        <ChartBox height={200} sx={{ p: "0px 10px 10px 10px" }}>
+        <ChartBox height={250} sx={{ p: "0px 10px 10px 10px" }}>
           <Chart
             height="100%"
             width="100%"

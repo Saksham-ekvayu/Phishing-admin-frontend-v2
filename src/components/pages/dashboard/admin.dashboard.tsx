@@ -13,8 +13,8 @@ import { DashboardController } from "./dashboard.controller";
 import { BarGraph } from "./bar-charts/bar-graph";
 import { LineGraph } from "./line-chart/line-graph";
 import { PageHeader, Spacing, SpacingEnum } from "@/components/common";
-import { PolarAreaGraph } from "./polar-area-charts/polar-area-graph";
 import { DonutChart } from "./donut-chart/donut-graph";
+import { LatestData } from "./latest-data/table";
 
 export default function AdminDashboard() {
   const { getters } = DashboardController();
@@ -46,18 +46,18 @@ export default function AdminDashboard() {
       </Grid>
       <Box sx={{ p: 0, mt: 2 }}>
         <Grid container spacing={3}>
-          <Grid item xs={12} md={6}>
-            <BarGraph />
-          </Grid>
-          <Grid item xs={12} md={6}>
+          <Grid item xs={12} md={7}>
             <LineGraph />
+          </Grid>
+          <Grid item xs={12} md={5}>
+            <LatestData />
           </Grid>
           <Grid item xs={12} md={4}>
             <DonutChart />
           </Grid>
-          {/* <Grid item xs={12} md={4}>
-            <PolarAreaGraph />
-          </Grid> */}
+          <Grid item xs={12} md={4}>
+            <BarGraph />
+          </Grid>
         </Grid>
       </Box>
     </>
