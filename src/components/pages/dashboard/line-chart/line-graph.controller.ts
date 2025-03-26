@@ -45,13 +45,27 @@ export function LineGraphController(): ILineGraphControllerResponses {
 
   const series = useMemo(() => lineChartData, [lineChartData]);
 
+  // Calculate default zoom range (last 30 days)
+  const defaultZoomRange = useMemo(() => {
+    if (lineChartData.length === 0) return null;
+
+    const endDate = new Date(lineChartData[lineChartData.length - 1].x);
+    const startDate = new Date(endDate);
+    startDate.setDate(startDate.getDate() - 30); // Show last 30 days by default
+
+    return {
+      min: startDate.getTime(),
+      max: endDate.getTime(),
+    };
+  }, [lineChartData]);
+
   const chartOptions: ApexOptions = useMemo(
     () => ({
       chart: {
         type: "area",
         stacked: false,
         height: 350,
-        background: 'transparent',
+        background: "transparent",
         zoom: {
           type: "x",
           enabled: true,
@@ -62,7 +76,7 @@ export function LineGraphController(): ILineGraphControllerResponses {
         },
       },
       stroke: {
-        curve: 'smooth', // Makes the line smoother
+        curve: "smooth", // Makes the line smoother
         width: 2, // Reduces line width for cleaner appearance
       },
       dataLabels: {
@@ -96,6 +110,10 @@ export function LineGraphController(): ILineGraphControllerResponses {
       },
       xaxis: {
         type: "datetime",
+
+        // Set default range to show only the last 30 days
+        min: defaultZoomRange?.min,
+        max: defaultZoomRange?.max,
       },
       tooltip: {
         shared: false,
