@@ -12,8 +12,9 @@ import {
 import { DashboardController } from "./dashboard.controller";
 import { BarGraph } from "./bar-charts/bar-graph";
 import { LineGraph } from "./line-chart/line-graph";
-import { SlopeGraph } from "./slope-chart/slope-graph";
 import { PageHeader, Spacing, SpacingEnum } from "@/components/common";
+import { PolarAreaGraph } from "./polar-area-charts/polar-area-graph";
+import { DonutChart } from "./donut-chart/donut-graph";
 
 export default function AdminDashboard() {
   const { getters } = DashboardController();
@@ -51,9 +52,12 @@ export default function AdminDashboard() {
           <Grid item xs={12} md={6}>
             <LineGraph />
           </Grid>
-          <Grid item xs={12} md={8}>
-            <SlopeGraph />
+          <Grid item xs={12} md={4}>
+            <DonutChart />
           </Grid>
+          {/* <Grid item xs={12} md={4}>
+            <PolarAreaGraph />
+          </Grid> */}
         </Grid>
       </Box>
     </>

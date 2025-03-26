@@ -65,7 +65,15 @@ export function ChartContainer(props: IChartsContainerProps): JSX.Element {
       <CardHeader
         title={title}
         subheader={description}
-        sx={{ p: 1 }}
+        sx={{
+          p: 1,
+          "& .MuiCardHeader-title": {
+            fontSize: "0.875rem", // Smaller font size for title
+          },
+          "& .MuiCardHeader-subheader": {
+            fontSize: "0.75rem", // Smaller font size for description/subheader
+          },
+        }}
         action={
           <>
             {disableAction && (

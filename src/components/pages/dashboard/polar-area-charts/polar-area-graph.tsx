@@ -1,32 +1,31 @@
 import { ReactElement } from "react";
-// import Chart from "react-apexcharts";
 import { StringHelper } from "@/helpers/string.helper";
-import { LineGraphController } from "./line-graph.controller";
+import { PolarAreaGraphController } from "./polar-area-graph.controller";
 import {
   Chart,
   ChartContainer,
   ChartProvider,
-} from "@/components/common/charts";
+} from "@/components/common";
 import { ChartBox } from "../chart-box";
 
-export function LineGraph(): ReactElement {
-  const { getters } = LineGraphController();
+export function PolarAreaGraph(): ReactElement {
+  const { getters } = PolarAreaGraphController();
   const { title, chartOptions, series, enableButton } = getters;
 
   return (
-    <ChartProvider id={StringHelper.replaceSpaceToDash(title)}>
+    <ChartProvider id={StringHelper.generateUID(title, 1)}>
       <ChartContainer
         title={title}
-        description="This chart shows stock price movement over time."
+        description="This chart shows distribution across different categories."
         disableAction={enableButton}
       >
-        <ChartBox height={200}>
+        <ChartBox height={350}>
           <Chart
             height="100%"
             width="100%"
             options={chartOptions}
-            series={[{ name: "XYZ MOTORS", data: series }]}
-            type="area"
+            series={series}
+            type="polarArea"
           />
         </ChartBox>
       </ChartContainer>
