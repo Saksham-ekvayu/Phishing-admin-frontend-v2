@@ -17,7 +17,7 @@ import { ChartBox } from "../chart-box";
 
 export function LatestData(): ReactElement {
   const { getters } = TableController();
-  const { title, tableData, enableButton } = getters;
+  const { title, tableData } = getters;
 
   // Function to determine chip color based on risk level
   const getRiskColor = (risk: string) => {
