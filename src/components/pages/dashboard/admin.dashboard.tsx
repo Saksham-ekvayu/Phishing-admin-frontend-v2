@@ -15,6 +15,7 @@ import { LineGraph } from "./line-chart/line-graph";
 import { PageHeader, Spacing, SpacingEnum } from "@/components/common";
 import { DonutChart } from "./donut-chart/donut-graph";
 import { LatestData } from "./latest-data/table";
+import GeographyChart from "./geography-chart/geography-chart";
 
 export default function AdminDashboard() {
   const { getters } = DashboardController();
@@ -61,6 +62,9 @@ export default function AdminDashboard() {
           </Grid>
           <Grid item xs={12} md={4}>
             <BarGraph />
+          </Grid>
+          <Grid item xs={12} md={4}>
+            <GeographyChart isDashboard={true} />
           </Grid>
         </Grid>
       </Box>
