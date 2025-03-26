@@ -64,7 +64,9 @@ export default function AdminDashboard() {
             <BarGraph />
           </Grid>
           <Grid item xs={12} md={4}>
-            <GeographyChart isDashboard={true} />
+            <Box>
+              <GeographyChart isDashboard={true} />
+            </Box>
           </Grid>
         </Grid>
       </Box>
