@@ -61,16 +61,19 @@ export function LineGraphController(): ILineGraphControllerResponses {
           autoSelected: "zoom",
         },
       },
+      stroke: {
+        curve: 'smooth', // Makes the line smoother
+        width: 2, // Reduces line width for cleaner appearance
+      },
       dataLabels: {
         enabled: false,
       },
       markers: {
         size: 0,
       },
-      // title: {
-      //   text: "Stock Price Movement",
-      //   align: "left",
-      // },
+      grid: {
+        show: false, // Removes the grid lines
+      },
       fill: {
         type: "gradient",
         gradient: {
