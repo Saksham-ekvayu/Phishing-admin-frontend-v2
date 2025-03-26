@@ -17,12 +17,8 @@ import {
   Radio,
   Divider,
 } from "@mui/material";
-import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
-import EditIcon from "@mui/icons-material/Edit";
-import LockIcon from "@mui/icons-material/Lock";
-import PaletteIcon from "@mui/icons-material/Palette";
-import LogoutIcon from "@mui/icons-material/Logout";
 import { useRouter } from "next/navigation";
+import { MuiIcons } from "./icon";
 
 function CustomThemeSwitcher({ onClose }: { onClose: () => void }) {
   const { mode, setMode } = useColorScheme();
@@ -87,8 +83,8 @@ export default function UserProfile() {
           alt="User"
           src="/path-to-user-image.jpg"
           sx={{
-            width: { xs: "30px", sm: "40px", md: "50px" }, // Adjust avatar size based on screen width
-            height: { xs: "30px", sm: "40px", md: "50px" }, // Keep width and height equal
+            width: { xs: "30px", sm: "30px", md: "40px" }, // Adjust avatar size based on screen width
+            height: { xs: "30px", sm: "30px", md: "40px" }, // Keep width and height equal
           }}
         />
         <Typography
@@ -104,7 +100,7 @@ export default function UserProfile() {
         >
           John Doe ugfcb uhgv
         </Typography>
-        <ArrowDropDownIcon
+        <MuiIcons.ArrowDropDownIcon
           sx={{
             fontSize: { xs: "16px", sm: "20px" }, // Adjust icon size
           }}
@@ -125,7 +121,7 @@ export default function UserProfile() {
           }}
         >
           <ListItemIcon>
-            <EditIcon fontSize="small" />
+            <MuiIcons.EditIcon fontSize="small" />
           </ListItemIcon>
           Edit Profile
         </MenuItem>
@@ -136,13 +132,13 @@ export default function UserProfile() {
           }}
         >
           <ListItemIcon>
-            <LockIcon fontSize="small" />
+            <MuiIcons.LockIcon fontSize="small" />
           </ListItemIcon>
           Change Password
         </MenuItem>
         <MenuItem onClick={handleThemeClick}>
           <ListItemIcon>
-            <PaletteIcon fontSize="small" />
+            <MuiIcons.PaletteIcon fontSize="small" />
           </ListItemIcon>
           Change Theme
         </MenuItem>
@@ -154,7 +150,7 @@ export default function UserProfile() {
           }}
         >
           <ListItemIcon>
-            <LogoutIcon fontSize="small" />
+            <MuiIcons.LogoutIcon fontSize="small" />
           </ListItemIcon>
           Logout
         </MenuItem>

@@ -1,6 +1,6 @@
 "use client";
 
-import { ThemeOptions, useMediaQuery } from '@mui/material';
+import { ThemeOptions, useMediaQuery } from "@mui/material";
 import React, {
   createContext,
   useEffect,
@@ -10,11 +10,11 @@ import React, {
   useContext,
   useCallback,
   JSX,
-} from 'react';
-import { darkThemeOptions, lightThemeOptions } from '@/components';
+} from "react";
+import { darkThemeOptions, lightThemeOptions } from "@/components/theme";
 
 export interface ISettings {
-  direction?: 'ltr' | 'rtl';
+  direction?: "ltr" | "rtl";
   responsiveFontSizes?: boolean;
   theme: string;
   themeOption: ThemeOptions;
@@ -30,9 +30,9 @@ interface ISettingsProviderProps {
 }
 
 const initialSettings: ISettings = {
-  direction: 'ltr',
+  direction: "ltr",
   responsiveFontSizes: true,
-  theme: 'light',
+  theme: "light",
   themeOption: lightThemeOptions,
 };
 
@@ -49,7 +49,7 @@ export const SettingsContext = createContext<ISettingsContextValue>({
 export function SettingsProvider(props: ISettingsProviderProps): JSX.Element {
   const { children } = props;
   const [settings, setSettings] = useState<ISettings>(initialSettings);
-  const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
+  const prefersDarkMode = useMediaQuery("(prefers-color-scheme: dark)");
 
   /**
    * restore settings from local storage
@@ -60,15 +60,15 @@ export function SettingsProvider(props: ISettingsProviderProps): JSX.Element {
 
     try {
       const storedData: string | null =
-        globalThis.localStorage.getItem('settings');
+        globalThis.localStorage.getItem("settings");
 
       if (storedData) {
         restoreSetting = JSON.parse(storedData);
       } else {
         restoreSetting = {
-          direction: 'ltr',
+          direction: "ltr",
           responsiveFontSizes: true,
-          theme: prefersDarkMode ? 'dark' : 'light',
+          theme: prefersDarkMode ? "dark" : "light",
           themeOption: prefersDarkMode ? darkThemeOptions : lightThemeOptions,
         };
       }
@@ -83,7 +83,7 @@ export function SettingsProvider(props: ISettingsProviderProps): JSX.Element {
    * store in local storage
    */
   const storeSettings = useCallback((storeSetting: ISettings): void => {
-    globalThis.localStorage.setItem('settings', JSON.stringify(storeSetting));
+    globalThis.localStorage.setItem("settings", JSON.stringify(storeSetting));
   }, []);
 
   useEffect(() => {
@@ -102,14 +102,14 @@ export function SettingsProvider(props: ISettingsProviderProps): JSX.Element {
       setSettings(updatedSettings);
       storeSettings(updatedSettings);
     },
-    [storeSettings],
+    [storeSettings]
   );
   const value = useMemo(
     () => ({
       settings,
       saveSettings,
     }),
-    [saveSettings, settings],
+    [saveSettings, settings]
   );
 
   return (
